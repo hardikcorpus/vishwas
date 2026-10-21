@@ -512,7 +512,13 @@
       </div>
       <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center">
         <span style="font-size:14px;color:var(--text-muted)">{{ resultLabel }}</span>
-        
+        <div style="display:flex;align-items:center;gap:8px"><span style="font-size:13px;color:var(--text-subtle)">Per page</span>
+          <div style="display:flex">
+            <sc-for list="{{ mSizeOpts }}" as="z" hint-placeholder-count="4">
+              <button onClick="{{ z.onClick }}" style="font:inherit;font-family:var(--font-mono);font-size:12px;cursor:pointer;min-width:40px;padding:6px 10px;margin-left:-1px;border:1px solid {{ z.bd }};background:{{ z.bg }};color:{{ z.fg }}">{{ z.label }}</button>
+            </sc-for>
+          </div>
+        </div>
       </div>
       <sc-if value="{{ noResults }}">
         <div style="padding:40px;border:1px dashed var(--border-default);display:flex;flex-direction:column;gap:12px;align-items:flex-start">
@@ -540,6 +546,12 @@
           </article>
         </sc-for>
       </div>
+      <sc-if value="{{ mHasMore }}">
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:16px">
+          <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" variant="secondary" icon-right="arrow-down" on-click="{{ mLoadMore }}" hint-size="160px,40px">{{ mMoreLabel }}</x-import>
+          <button onClick="{{ mShowAll }}" style="font:inherit;font-size:14px;cursor:pointer;border:0;background:none;padding:0;color:var(--teal-700);text-decoration:underline;text-underline-offset:3px">Show all {{ mTotal }}</button>
+        </div>
+      </sc-if>
     </div>
   </section>
 
@@ -1549,12 +1561,12 @@
 const AWARDS = [{"year":"2004","title":"Highest growth of MOLYKOTE® speciality lubricants","event":"eBIG Distributor award · Dow Corning India Pvt. Ltd.","src":"assets/awards/2004.jpg"},{"year":"2005","title":"Excellent sales performance","event":"eBIG Distributor · Dow Corning India Pvt. Ltd.","src":"assets/awards/2005.jpg"},{"year":"2011","title":"Best sales performance for the year 2010","event":"Dow Corning Distributor Meet · Mumbai","src":"assets/awards/2011a.jpg"},{"year":"2011","title":"Best in class presentation · Automotive","event":"Dow Corning Expert Round Table · India","src":"assets/awards/2011b.jpg"},{"year":"2012","title":"2nd best case presentation · Automotive segment","event":"Dow Corning Expert Round Table Conference · Mumbai · presented to Chandan Kohli","src":"assets/awards/2012.jpg"},{"year":"2017","title":"Our valued growth partner — “Step up for success!”","event":"Dow · Dow Corning · MOLYKOTE®","src":"assets/awards/2017.jpg"},{"year":"2023","title":"Best ERT case award","event":"DuPont MOLYKOTE® South Asia Channel Partner Meet","src":"assets/awards/2023.jpg"},{"year":"2025","title":"Best distributor for organic growth & customer retention","event":"DuPont MOLYKOTE® South Asia Channel Partner Meet","src":"assets/awards/2025.jpg"}];
 class Component extends DCLogic {
   V = { navOn: 'var(--teal-700)', navOff: 'var(--text-body)', bar: 'var(--teal-600)', onBg: 'var(--teal-700)', onFg: '#fff', offBg: '#fff', offFg: 'var(--text-body)', offBd: 'var(--border-default)', tintOn: 'var(--teal-50)', tintOff: 'transparent', tfgOn: 'var(--teal-800)', tfgOff: 'var(--text-body)', spec: 'var(--text-strong)', narrowAt: 900 };
-  state = { dpaths: [], dfeats: [], dsize: 25, dshown: null, dfOpen: false, page: 'home', dd: false, mob: false, narrow: false, vw: 1440, q: '', cat: 'all', app: 'all', dpath: 0, dfam: 'all', tab: 'app', happ: 0, form: { name: '', company: '', email: '', phone: '', brand: '', req: '', msg: '', ctype: '', mode: '', vdate: '', vslot: '', vsite: '', cslot: '' }, calM: 0, errors: {}, sent: false, D: window.VE || null };
+  state = { dpaths: [], dfeats: [], dsize: 25, dshown: null, msize: 25, mshown: null, mkey: '', dfOpen: false, page: 'home', dd: false, mob: false, narrow: false, vw: 1440, q: '', cat: 'all', app: 'all', dpath: 0, dfam: 'all', tab: 'app', happ: 0, form: { name: '', company: '', email: '', phone: '', brand: '', req: '', msg: '', ctype: '', mode: '', vdate: '', vslot: '', vsite: '', cslot: '' }, calM: 0, errors: {}, sent: false, D: window.VE || null };
   dirRef = React.createRef(); awRef = React.createRef(); dowRef = React.createRef(); famRef = React.createRef();
   componentDidMount() {
     const chk = () => { if (window.VE) this.setState({ D: window.VE }); else this.t = setTimeout(chk, 40); };
     if (!this.state.D) chk();
-    this.onR = () => this.setState({ narrow: window.innerWidth < this.V.narrowAt, vw: window.innerWidth });
+    this.onR = () => { this.setState({ narrow: window.innerWidth < this.V.narrowAt, vw: window.innerWidth }); if (!this.sizeInit) { this.sizeInit = true; if (window.innerWidth < 700) this.setState({ dsize: 10, msize: 10 }); } };
     this.onR(); window.addEventListener('resize', this.onR);
     this.onK = e => { if (e.key === 'Escape' && this.state.lb != null) this.setState({ lb: null }); }; window.addEventListener('keydown', this.onK); this.armSlides();
     const h = (location.hash || '').slice(1);
@@ -1675,8 +1687,15 @@ class Component extends DCLogic {
     const catName = id => (D.molyCats.find(c => c.id === id) || {}).name;
     out.products = D.molyProducts.filter(p => (s.cat === 'all' || p.cat === s.cat || (p.also || []).includes(s.cat)) && (s.app === 'all' || p.apps.includes(s.app)) && (!q || (p.name + ' ' + Object.values(p.titles || {}).join(' ') + ' ' + p.type + ' ' + p.desc + ' ' + p.app).toLowerCase().includes(q)))
       .map(p => ({ ...p, name: (s.cat !== 'all' && p.titles && p.titles[s.cat]) || p.name, catName: s.cat !== 'all' ? catName(s.cat) : [p.cat, ...(p.also || [])].map(catName).join(' · '), spray: !!p.spray, specs: p.specs.map(x => ({ ...x, c: x.v === 'Verify TDS' ? 'var(--text-subtle)' : V.spec })), onEnquire: () => this.enquire('molykote', p.name) }));
-    out.noResults = out.products.length === 0;
-    out.resultLabel = out.products.length + (out.products.length === 1 ? ' product' : ' products') + (s.app !== 'all' ? ' · ' + (D.molyApps.find(a => a.id === s.app) || {}).name : '');
+    const mAll = out.products, mKey = s.cat + '|' + s.app + '|' + q + '|' + s.msize, mShown = Math.min(mAll.length, (s.mkey === mKey && s.mshown) || s.msize);
+    out.products = mAll.slice(0, mShown);
+    out.mHasMore = mShown < mAll.length; out.mTotal = mAll.length;
+    out.mMoreLabel = 'Load ' + Math.min(s.msize, mAll.length - mShown) + ' more';
+    out.mLoadMore = () => this.setState({ mshown: mShown + s.msize, mkey: mKey });
+    out.mShowAll = () => this.setState({ mshown: mAll.length, mkey: mKey });
+    out.mSizeOpts = [10, 25, 50, 100].map(n => ({ n, label: String(n), ...this.chip(s.msize === n), onClick: () => this.setState({ msize: n, mshown: null }) }));
+    out.noResults = mAll.length === 0;
+    out.resultLabel = (mAll.length > s.msize ? 'Showing ' + mShown + ' of ' + mAll.length : mAll.length) + (mAll.length === 1 ? ' product' : ' products') + (s.app !== 'all' ? ' · ' + (D.molyApps.find(a => a.id === s.app) || {}).name : '');
     out.selCat = s.cat === 'all' ? { n: '00', name: 'All product families', intro: 'MOLYKOTE® directory. Filter by family or application, or search by product name.' } : D.molyCats.find(c => c.id === s.cat);
 
     out.dowFactors = D.dowFactors;
