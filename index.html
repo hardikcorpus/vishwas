@@ -14,6 +14,11 @@
 <script src="image-slot.js"></script>
 <style>body{margin:0;background:#fff}a{color:var(--teal-700)}a:hover{color:var(--teal-900)}*{box-sizing:border-box}
 @media (max-width:699px){
+.bh{position:relative;overflow:hidden;padding:48px 20px 40px !important;gap:0 !important}
+.bh-img{position:absolute !important;inset:0;min-height:0 !important;flex:none !important;z-index:0}
+.bh::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(6,38,37,.72) 0%,rgba(6,38,37,.84) 55%,rgba(6,38,37,.92) 100%)}
+.bh-copy{position:relative;z-index:2;flex:1 1 100% !important}
+.bh-h1{color:#fff !important}.bh-acc{color:var(--mint-300) !important}.bh-lead{color:var(--teal-50) !important}.bh-eyebrow,.bh-fine{color:var(--teal-300) !important}
 .ab-stats{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
 .ab-stats>div{padding:12px 12px 14px 0 !important;gap:2px !important}
 .ab-stats>div>span:last-child{font-size:18px !important}
@@ -468,18 +473,18 @@
 
 <sc-if value="{{ is_molykote }}">
 <main data-screen-label="MOLYKOTE® brand page">
-  <section style="max-width:1240px;margin:0 auto;padding:56px 32px 72px;display:flex;flex-wrap:wrap;gap:56px;align-items:stretch">
-    <div style="flex:1 1 380px;display:flex;flex-direction:column;gap:24px;justify-content:center">
-      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Products / MOLYKOTE®</span>
-      <h1 style="margin:0;font-size:clamp(40px,4.8vw,60px);font-weight:300;letter-spacing:-.035em;line-height:1.04;color:var(--text-strong)">MOLYKOTE® <span style="color:var(--teal-600)">specialty lubricants.</span></h1>
-      <p style="margin:0;font-size:18px;line-height:1.55;max-width:500px">Greases, coatings, pastes, oils, compounds and dispersions engineered for conditions where conventional lubricants fall short. Browse by family, search by name or start from your application.</p>
+  <section class="bh" style="max-width:1240px;margin:0 auto;padding:56px 32px 72px;display:flex;flex-wrap:wrap;gap:56px;align-items:stretch">
+    <div class="bh-copy" style="flex:1 1 380px;display:flex;flex-direction:column;gap:24px;justify-content:center">
+      <span class="bh-eyebrow" style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Products / MOLYKOTE®</span>
+      <h1 class="bh-h1" style="margin:0;font-size:clamp(40px,4.8vw,60px);font-weight:300;letter-spacing:-.035em;line-height:1.04;color:var(--text-strong)">MOLYKOTE® <span class="bh-acc" style="color:var(--teal-600)">specialty lubricants.</span></h1>
+      <p class="bh-lead" style="margin:0;font-size:18px;line-height:1.55;max-width:500px">Greases, coatings, pastes, oils, compounds and dispersions engineered for conditions where conventional lubricants fall short. Browse by family, search by name or start from your application.</p>
       <div style="display:flex;flex-wrap:wrap;gap:12px">
         <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" size="l" icon-right="arrow-down" on-click="{{ toDir }}" hint-size="200px,48px">Product directory</x-import>
         <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" size="l" variant="secondary" on-click="{{ enquireMoly }}" hint-size="200px,48px">Discuss an application</x-import>
       </div>
-      <p style="margin:0;font-size:12px;color:var(--text-subtle)">MOLYKOTE® is a trademark of DuPont. Vishwas Enterprises is a distributor and does not manufacture these products.</p>
+      <p class="bh-fine" style="margin:0;font-size:12px;color:var(--text-subtle)">MOLYKOTE® is a trademark of DuPont. Vishwas Enterprises is a distributor and does not manufacture these products.</p>
     </div>
-    <div style="flex:1.2 1 460px;position:relative;min-height:420px"><image-slot id="v1-moly-hero" shape="rect" placeholder="MOLYKOTE® hero · grease on a machined bearing"></image-slot></div>
+    <div class="bh-img" style="flex:1.2 1 460px;position:relative;min-height:420px"><image-slot id="v1-moly-hero" shape="rect" placeholder="MOLYKOTE® hero · grease on a machined bearing"></image-slot></div>
   </section>
   <section style="border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle);background:#fff">
     <div style="max-width:1240px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
@@ -597,18 +602,18 @@
 
 <sc-if value="{{ is_dowsil }}">
 <main data-screen-label="DOWSIL™ brand page">
-  <section style="max-width:1240px;margin:0 auto;padding:56px 32px 72px;display:flex;flex-wrap:wrap;gap:56px;align-items:stretch">
-    <div style="flex:1 1 380px;display:flex;flex-direction:column;gap:24px;justify-content:center">
-      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Products / DOWSIL™</span>
-      <h1 style="margin:0;font-size:clamp(40px,4.8vw,60px);font-weight:300;letter-spacing:-.035em;line-height:1.04;color:var(--text-strong)">DOWSIL™ <span style="color:var(--teal-600)">silicone technology.</span></h1>
-      <p style="margin:0;font-size:18px;line-height:1.55;max-width:500px">Silicone sealants, adhesives and materials for sealing, bonding, protection and performance. The right product depends on your application, substrates, environment, performance needs and process.</p>
+  <section class="bh" style="max-width:1240px;margin:0 auto;padding:56px 32px 72px;display:flex;flex-wrap:wrap;gap:56px;align-items:stretch">
+    <div class="bh-copy" style="flex:1 1 380px;display:flex;flex-direction:column;gap:24px;justify-content:center">
+      <span class="bh-eyebrow" style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Products / DOWSIL™</span>
+      <h1 class="bh-h1" style="margin:0;font-size:clamp(40px,4.8vw,60px);font-weight:300;letter-spacing:-.035em;line-height:1.04;color:var(--text-strong)">DOWSIL™ <span class="bh-acc" style="color:var(--teal-600)">silicone technology.</span></h1>
+      <p class="bh-lead" style="margin:0;font-size:18px;line-height:1.55;max-width:500px">Silicone sealants, adhesives and materials for sealing, bonding, protection and performance. The right product depends on your application, substrates, environment, performance needs and process.</p>
       <div style="display:flex;flex-wrap:wrap;gap:12px">
         <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" size="l" icon-right="arrow-down" on-click="{{ toFams }}" hint-size="230px,48px">Explore product categories</x-import>
         <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" size="l" variant="secondary" on-click="{{ enquireDow }}" hint-size="200px,48px">Discuss a requirement</x-import>
       </div>
-      <p style="margin:0;font-size:12px;color:var(--text-subtle)">DOWSIL™ is a trademark of Dow. Vishwas Enterprises is a distributor and does not manufacture these products.</p>
+      <p class="bh-fine" style="margin:0;font-size:12px;color:var(--text-subtle)">DOWSIL™ is a trademark of Dow. Vishwas Enterprises is a distributor and does not manufacture these products.</p>
     </div>
-    <div style="flex:1.2 1 460px;position:relative;min-height:420px"><image-slot id="v1-dow-hero" shape="rect" placeholder="DOWSIL™ hero · silicone bead dispensed on a housing"></image-slot></div>
+    <div class="bh-img" style="flex:1.2 1 460px;position:relative;min-height:420px"><image-slot id="v1-dow-hero" shape="rect" placeholder="DOWSIL™ hero · silicone bead dispensed on a housing"></image-slot></div>
   </section>
 
   <section style="border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle)">
