@@ -17,6 +17,9 @@
 <script src="ve-data.js"></script>
 <script src="image-slot.js"></script>
 <style>body{margin:0;background:#fff}a{color:var(--teal-700)}a:hover{color:var(--teal-900)}*{box-sizing:border-box}
+.ab-facts{display:flex;flex-wrap:wrap;align-items:center;gap:6px 0;font-size:19px;color:var(--text-strong)}
+.ab-facts span+span::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--brass-600);margin:0 18px;vertical-align:middle}
+.ab-facts small{color:var(--text-subtle);font-size:inherit;margin-left:6px}
 .md-strip{background:#fff;border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle)}
 .md-in{max-width:1240px;margin:0 auto;padding:72px 32px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:0 56px;align-items:center}
 .md-who{display:flex;align-items:center;gap:28px;padding-right:56px;border-right:1px solid var(--border-subtle)}
@@ -24,16 +27,19 @@
 .md-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
 .md-name{margin:0 0 8px;font-size:34px;font-weight:300;letter-spacing:-.035em;line-height:1.05;color:var(--text-strong)}
 .md-role{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brass-600);line-height:1.6;display:block}
-.md-bio{margin:0;font-size:17px;line-height:1.65;color:var(--text-body);max-width:66ch;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;text-wrap:pretty}
+.md-bio{margin:0;font-size:17px;line-height:1.65;color:var(--text-body);max-width:66ch;text-wrap:pretty}
 .md-stat{text-align:right;padding-left:8px}
 .md-stat b{display:block;font-weight:300;font-size:56px;letter-spacing:-.04em;line-height:1;color:var(--teal-600);margin-bottom:6px}
 .md-stat span{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle);line-height:1.6}
 @media (max-width:899px){
+.ab-intro{padding:44px 20px 40px !important;gap:24px !important}
+.ab-facts{font-size:16px}
+.ab-facts span+span::before{margin:0 12px}
 .md-in{grid-template-columns:minmax(0,1fr);gap:24px;padding:48px 20px}
 .md-who{padding-right:0;border-right:0;gap:20px}
 .md-photo{width:112px;height:112px}
 .md-name{font-size:30px}
-.md-bio{display:block;-webkit-line-clamp:unset;font-size:16px}
+.md-bio{font-size:16px}
 .md-stat{text-align:left;padding:18px 0 0;border-top:1px solid var(--border-subtle);display:flex;align-items:baseline;gap:14px}
 .md-stat b{font-size:40px;margin-bottom:0}
 }
@@ -43,9 +49,6 @@
 .bh::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(6,38,37,.72) 0%,rgba(6,38,37,.84) 55%,rgba(6,38,37,.92) 100%)}
 .bh-copy{position:relative;z-index:2;flex:1 1 100% !important}
 .bh-h1{color:#fff !important}.bh-acc{color:var(--mint-300) !important}.bh-lead{color:var(--teal-50) !important}.bh-eyebrow,.bh-fine{color:var(--teal-300) !important}
-.ab-stats{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
-.ab-stats>div{padding:12px 12px 14px 0 !important;gap:2px !important}
-.ab-stats>div>span:last-child{font-size:18px !important}
 }
 </style>
 </helmet>
@@ -788,17 +791,12 @@
   <section data-screen-label="Home · Leadership" style="max-width: 1240px; margin: 0 auto; padding: 96px 32px; padding-top: 40px; padding-bottom: 40px"><div style="display:flex;flex-wrap:wrap;align-items:center;gap:48px;padding:56px;background:var(--teal-50);border:1px solid var(--border-subtle);border-radius:4px"><div style="flex:0 0 220px;width:220px;height:220px;border-radius:50%;overflow:hidden;background:#fff;border:1px solid var(--border-subtle)"><img src="assets/chandan-kohli.jpg" alt="Chandan Kohli, Managing Director" style="display:block;width:100%;height:100%;object-fit:cover;object-position:50% 25%"></div><div style="flex:1 1 380px;display:flex;flex-direction:column;gap:14px"><h2 style="margin:0;font-size:clamp(30px,3.4vw,40px);font-weight:400;letter-spacing:-.03em;color:var(--text-strong)">Chandan Kohli</h2><span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--brass-600)">Managing Director · Vishwas Enterprises</span><p style="margin:6px 0 0;max-width:640px;font-size:17px;line-height:1.65">Chandan Kohli graduated as a tools engineer from the Delhi Institute of Tool Engineering in 1997. He then worked at several companies, including Denso, solving customer problems first-hand. His love for the automotive industry and the products we supply led him to build a distribution channel of his own.</p></div></div></section></sc-if>
 <sc-if value="{{ ai_a }}" hint-placeholder-val="{{ true }}">
   <section data-screen-label="About · Intro A" style="background:var(--surface-tint);border-bottom:1px solid var(--teal-100)">
-    <div style="max-width:1240px;margin:0 auto;padding:72px 32px 0;display:flex;flex-direction:column;gap:56px">
-      <div style="display:flex;flex-wrap:wrap;gap:32px 64px;align-items:flex-end;justify-content:space-between">
-        <div style="flex:1 1 560px;display:flex;flex-direction:column;gap:24px">
-          <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Home / About Us</span>
-          <h1 style="margin:0;font-size:clamp(40px,5.2vw,68px);font-weight:300;letter-spacing:-.035em;line-height:1.02;color:var(--text-strong);text-wrap:balance">An experienced partner in <span style="color:var(--teal-600)">specialty materials.</span></h1>
-        </div>
-        
+    <div class="ab-intro" style="max-width:1240px;margin:0 auto;padding:72px 32px 64px;display:flex;flex-direction:column;gap:32px">
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Home / About Us</span>
+        <h1 style="margin:0;font-size:clamp(40px,5.2vw,68px);font-weight:300;letter-spacing:-.035em;line-height:1.02;color:var(--text-strong);text-wrap:balance">An experienced partner in <span style="color:var(--teal-600)">specialty materials.</span></h1>
       </div>
-      <div class="ab-stats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border-top:1px solid var(--teal-200)">
-        <div style="padding: 24px 24px 28px 0; display: flex; flex-direction: column; gap: 8px; border-right: 1px solid var(--teal-100); border-style: none"><span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Experience</span><span style="font-size:24px;font-weight:300;letter-spacing:-.02em;color:var(--text-strong)">25 years</span></div><div style="padding: 24px 24px 28px 0; display: flex; flex-direction: column; gap: 8px; border-right: 1px solid var(--teal-100); border-style: none"><span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Region</span><span style="font-size:24px;font-weight:300;letter-spacing:-.02em;color:var(--text-strong)">North India</span></div><div style="padding: 24px 24px 28px 0; display: flex; flex-direction: column; gap: 8px; border-right: 1px solid var(--teal-100); border-style: none"><span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">MOLYKOTE®</span><span style="font-size:24px;font-weight:300;letter-spacing:-.02em;color:var(--text-strong)">by DuPont</span></div><div style="padding: 24px 24px 28px 0; display: flex; flex-direction: column; gap: 8px; border-right: 1px solid var(--teal-100); border-style: none"><span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">DOWSIL™</span><span style="font-size:24px;font-weight:300;letter-spacing:-.02em;color:var(--text-strong)">by Dow</span></div>
-      </div>
+      <div class="ab-facts"><span>MOLYKOTE®<small>by DuPont</small></span><span>DOWSIL™<small>by Dow</small></span></div>
     </div>
   </section>
   <sc-if value="{{ la_1 }}" hint-placeholder-val="{{ true }}"><section data-screen-label="About · Leadership A1" class="md-strip">
