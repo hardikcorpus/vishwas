@@ -1,0 +1,34 @@
+/* Vishwas Enterprises — color tokens. Light mode, teal-led, cool neutrals. */
+:root{
+/* Teal — primary brand ramp */
+--teal-950:#062625;--teal-900:#0A3634;--teal-800:#0E4A47;--teal-700:#135F5B;--teal-600:#1A7A74;--teal-500:#23968E;--teal-400:#4DB7AE;--teal-300:#8ED6CE;--teal-200:#C2EAE4;--teal-100:#E3F4F1;--teal-50:#F2FAF8;
+/* Mint — luminous highlight used on dark teal grounds only */
+--mint-300:#A8EFE6;--mint-200:#CDF6F0;
+/* Cool neutrals (slight green-grey cast) */
+--neutral-0:#FFFFFF;--neutral-50:#F7F9F8;--neutral-100:#EFF2F1;--neutral-200:#E1E6E5;--neutral-300:#C9D0CF;--neutral-400:#A3ADAC;--neutral-500:#7A8786;--neutral-600:#566463;--neutral-700:#3A4747;--neutral-800:#243030;--neutral-900:#121B1B;
+/* Brass — sparing industrial accent (part numbers, index digits, highlights) */
+--brass-600:#8C6238;--brass-500:#A97B4F;--brass-100:#F3EADF;
+/* Semantic */
+--green-600:#1F7A47;--green-100:#E2F2E8;
+--amber-600:#9A6212;--amber-100:#FBF0DC;
+--red-600:#B4302A;--red-100:#FAE5E3;
+--blue-600:#1D6299;--blue-100:#E1EEF8;
+
+/* Semantic aliases — text */
+--text-strong:var(--neutral-900);--text-body:var(--neutral-700);--text-muted:var(--neutral-600);--text-subtle:var(--neutral-500);--text-disabled:var(--neutral-400);
+--text-brand:var(--teal-700);--text-on-brand:var(--neutral-0);--text-on-dark:var(--teal-50);--text-on-dark-muted:var(--teal-300);--text-highlight-dark:var(--mint-300);--text-accent:var(--brass-600);
+--text-link:var(--teal-700);--text-link-hover:var(--teal-900);
+/* Surfaces */
+--surface-page:var(--neutral-0);--surface-tint:var(--teal-50);--surface-sunken:var(--neutral-50);--surface-card:var(--neutral-0);--surface-muted:var(--neutral-100);
+--surface-brand:var(--teal-600);--surface-brand-hover:var(--teal-700);--surface-brand-press:var(--teal-800);
+--surface-dark:var(--teal-900);--surface-dark-raised:var(--teal-800);--surface-deepest:var(--teal-950);
+--surface-brand-subtle:var(--teal-100);
+/* Borders */
+--border-subtle:var(--neutral-200);--border-default:var(--neutral-300);--border-strong:var(--neutral-500);--border-brand:var(--teal-600);--border-on-dark:rgba(194,234,228,.18);
+--focus-ring:var(--teal-500);
+/* Status */
+--status-success:var(--green-600);--status-success-bg:var(--green-100);
+--status-warning:var(--amber-600);--status-warning-bg:var(--amber-100);
+--status-danger:var(--red-600);--status-danger-bg:var(--red-100);
+--status-info:var(--blue-600);--status-info-bg:var(--blue-100);
+}

@@ -1,0 +1,8 @@
+/* Minimal element defaults */
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font-family:var(--font-sans);font-size:var(--fs-body);line-height:var(--lh-body);color:var(--text-body);background:var(--surface-page);-webkit-font-smoothing:antialiased;letter-spacing:var(--tracking-body)}
+h1,h2,h3,h4{color:var(--text-strong);font-weight:var(--weight-regular);letter-spacing:var(--tracking-heading);line-height:var(--lh-heading);margin:0}
+p{margin:0;text-wrap:pretty}
+a{color:var(--text-link);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:var(--text-link-hover)}
+::selection{background:var(--teal-200);color:var(--teal-950)}

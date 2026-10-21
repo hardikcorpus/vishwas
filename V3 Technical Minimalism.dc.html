@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/vishwas-enterprises-design-system-30bbd906-baec-469e-9074-72a8139628ea/styles.css">
+<script src="_ds/vishwas-enterprises-design-system-30bbd906-baec-469e-9074-72a8139628ea/_ds_bundle.js"></script>
+<script src="ve-data.js"></script>
+<script src="image-slot.js"></script>
+<style>body{margin:0;background:#fff}a{color:var(--teal-700)}a:hover{color:var(--teal-900)}*{box-sizing:border-box}</style>
+</helmet>
+<div style="min-height:100vh;background:#fff;font-family:var(--font-sans);color:var(--text-body)" data-screen-label="V3 Technical Minimalism">
+
+<header style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--border-subtle)">
+  <div style="max-width:1240px;margin:0 auto;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a onClick="{{ go_home }}" style="cursor:pointer;display:flex;align-items:baseline;gap:12px;text-decoration:none">
+      <span style="font-size:17px;letter-spacing:-.03em;color:var(--text-strong);white-space:nowrap"><span style="font-weight:600">Vishwas</span> Enterprises</span>
+      <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}"><span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle);white-space:nowrap">Est. distributor · 25 yrs</span></sc-if>
+    </a>
+    <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;align-items:center;gap:28px">
+        <sc-for list="{{ nav }}" as="n" hint-placeholder-count="4">
+          <sc-if value="{{ n.notProducts }}">
+            <a onClick="{{ n.onClick }}" style="cursor:pointer;font-size:14px;color:{{ n.color }};text-decoration:none;height:64px;display:flex;align-items:center;box-shadow:inset 0 -1px 0 {{ n.bar }}" style-hover="color:var(--teal-700)">{{ n.label }}</a>
+          </sc-if>
+          <sc-if value="{{ n.isProducts }}">
+            <div onMouseEnter="{{ ddOpen }}" onMouseLeave="{{ ddClose }}" style="position:relative;height:64px;display:flex;align-items:center;box-shadow:inset 0 -1px 0 {{ n.bar }}">
+              <a onClick="{{ ddToggle }}" style="cursor:pointer;font-size:14px;color:{{ n.color }};text-decoration:none;display:flex;align-items:center;gap:6px">Products <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Icon" name="chevron-down" size="{{ 14 }}" hint-size="14px,14px"></x-import></a>
+              <sc-if value="{{ dd }}">
+                <div style="position:absolute;top:63px;left:-20px;width:420px;background:#fff;border:1px solid var(--border-default);box-shadow:var(--shadow-2)">
+                  <div style="padding:10px 20px;border-bottom:1px solid var(--border-subtle);font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Brands distributed</div>
+                  <a onClick="{{ go_molykote }}" style="cursor:pointer;text-decoration:none;display:grid;grid-template-columns:28px 1fr auto;gap:12px;align-items:baseline;padding:16px 20px;border-bottom:1px solid var(--border-subtle)" style-hover="background:var(--teal-50)"><span style="font-family:var(--font-mono);font-size:12px;color:var(--brass-600)">A</span><span style="font-size:15px;color:var(--text-strong)">MOLYKOTE® <span style="color:var(--text-subtle)">· DuPont</span></span><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-subtle)">7 families</span></a>
+                  <a onClick="{{ go_dowsil }}" style="cursor:pointer;text-decoration:none;display:grid;grid-template-columns:28px 1fr auto;gap:12px;align-items:baseline;padding:16px 20px;border-bottom:1px solid var(--border-subtle)" style-hover="background:var(--teal-50)"><span style="font-family:var(--font-mono);font-size:12px;color:var(--brass-600)">B</span><span style="font-size:15px;color:var(--text-strong)">DOWSIL™ <span style="color:var(--text-subtle)">· Dow</span></span><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-subtle)">6 pathways</span></a>
+                  <a onClick="{{ go_products }}" style="cursor:pointer;text-decoration:none;display:block;padding:12px 20px;font-size:13px;color:var(--teal-700)" style-hover="background:var(--teal-50)">All products overview →</a>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+        </sc-for>
+        <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" size="s" on-click="{{ go_contact }}" hint-size="110px,32px">Contact Us</x-import>
+      </nav>
+    </sc-if>
+    <sc-if value="{{ narrow }}">
+      <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" size="s" variant="secondary" icon-left="{{ mobIcon }}" on-click="{{ mobToggle }}" hint-size="90px,32px">Menu</x-import>
+    </sc-if>
+  </div>
+  <sc-if value="{{ mob }}">
+    <div style="border-top:1px solid var(--border-subtle);background:#fff;padding:0 32px 20px;display:flex;flex-direction:column">
+      <a onClick="{{ go_home }}" style="cursor:pointer;display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--border-subtle);font-size:16px;color:var(--text-strong);text-decoration:none"><span style="font-family:var(--font-mono);font-size:12px;color:var(--brass-600);width:20px">01</span>Home</a>
+      <a onClick="{{ go_products }}" style="cursor:pointer;display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--border-subtle);font-size:16px;color:var(--text-strong);text-decoration:none"><span style="font-family:var(--font-mono);font-size:12px;color:var(--brass-600);width:20px">02</span>Products</a>
+      <a onClick="{{ go_molykote }}" style="cursor:pointer;display:flex;gap:16px;padding:12px 0 12px 36px;border-bottom:1px solid var(--border-subtle);font-size:14px;color:var(--text-body);text-decoration:none">MOLYKOTE®</a>
+      <a onClick="{{ go_dowsil }}" style="cursor:pointer;display:flex;gap:16px;padding:12px 0 12px 36px;border-bottom:1px solid var(--border-subtle);font-size:14px;color:var(--text-body);text-decoration:none">DOWSIL™</a>
+      <a onClick="{{ go_about }}" style="cursor:pointer;display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--border-subtle);font-size:16px;color:var(--text-strong);text-decoration:none"><span style="font-family:var(--font-mono);font-size:12px;color:var(--brass-600);width:20px">03</span>About Us</a>
+      <a onClick="{{ go_insights }}" style="cursor:pointer;display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--border-subtle);font-size:16px;color:var(--text-strong);text-decoration:none"><span style="font-family:var(--font-mono);font-size:12px;color:var(--brass-600);width:20px">04</span>Insights &amp; Case Studies</a>
+      <div style="padding-top:16px"><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" full-width="{{ true }}" on-click="{{ go_contact }}" hint-size="100%,40px">Contact Us</x-import></div>
+    </div>
+  </sc-if>
+</header>
+
+<sc-if value="{{ is_home }}" hint-placeholder-val="{{ true }}">
+<main>
+  <!-- 1 Hero -->
+  <section data-screen-label="Home · Hero" style="max-width:1240px;margin:0 auto;padding:56px 32px 80px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:64px">
+    <div style="display:flex;flex-direction:column;gap:28px;justify-content:space-between">
+      <div style="display:flex;flex-direction:column;gap:28px">
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)"><span style="color:var(--brass-600)">00</span> — Authorised distributor · North India</span>
+        <h1 style="margin:0;font-size:clamp(38px,4.4vw,58px);font-weight:300;letter-spacing:-.035em;line-height:1.06;color:var(--text-strong);text-wrap:balance">Specialty materials. <span style="color:var(--teal-600)">Reliable industrial performance.</span></h1>
+        <p style="margin:0;font-size:17px;line-height:1.6;max-width:460px;text-wrap:pretty">Vishwas Enterprises distributes MOLYKOTE® specialty lubricants and DOWSIL™ silicone products to manufacturers, OEMs and maintenance teams across North India.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" icon-right="arrow-up-right" on-click="{{ go_products }}" hint-size="170px,40px">Explore Products</x-import>
+          <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" variant="secondary" on-click="{{ go_contact }}" hint-size="170px,40px">Contact Our Team</x-import>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;border-top:1px solid var(--border-strong)">
+        <div style="display:grid;grid-template-columns:140px 1fr;gap:16px;padding:11px 0;border-bottom:1px solid var(--border-subtle);font-size:14px"><span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Experience</span><span style="color:var(--text-strong)">25 years in distribution</span></div>
+        <div style="display:grid;grid-template-columns:140px 1fr;gap:16px;padding:11px 0;border-bottom:1px solid var(--border-subtle);font-size:14px"><span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Coverage</span><span style="color:var(--text-strong)">North India</span></div>
+        <div style="display:grid;grid-template-columns:140px 1fr;gap:16px;padding:11px 0;border-bottom:1px solid var(--border-subtle);font-size:14px"><span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Brands</span><span style="color:var(--text-strong)">MOLYKOTE® · DOWSIL™</span></div>
+      </div>
+    </div>
+    <figure style="margin:0;display:flex;flex-direction:column;gap:10px">
+      <div style="position:relative;flex:1;min-height:540px"><image-slot id="v3-hero" shape="rect" placeholder="Hero photograph · machined component with sealant bead, high-key grey"></image-slot></div>
+      <figcaption style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)"><span>Fig. 01 — Application</span><span>Lubrication · Sealing · Bonding</span></figcaption>
+    </figure>
+  </section>
+
+  <!-- 2 History -->
+  <section data-screen-label="Home · History" style="border-top:1px solid var(--border-subtle)">
+    <div style="max-width:1240px;margin:0 auto;padding:80px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:48px">
+      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)"><span style="color:var(--brass-600)">01</span> — Our company</span>
+      <h2 style="margin:0;font-size:clamp(28px,2.8vw,36px);font-weight:400;letter-spacing:-.03em;line-height:1.15;color:var(--text-strong);text-wrap:balance">Twenty-five years of industrial supply.</h2>
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <p style="margin:0;font-size:15px;line-height:1.65">For 25 years we have supplied specialty lubrication and silicone materials to industrial customers across North India. Our work is practical: understanding the application, pointing customers to the right product family and manufacturer documentation, and keeping supply dependable.</p>
+        <a onClick="{{ go_about }}" style="cursor:pointer;font-size:14px;color:var(--teal-700);text-decoration:none">About Us →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 Brands -->
+  <section data-screen-label="Home · Brands" style="border-top:1px solid var(--border-subtle)">
+    <div style="max-width:1240px;margin:0 auto;padding:80px 32px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:24px;flex-wrap:wrap;margin-bottom:40px">
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)"><span style="color:var(--brass-600)">02</span> — The brands we distribute</span>
+        <h2 style="margin:0;font-size:clamp(28px,2.8vw,36px);font-weight:400;letter-spacing:-.03em;color:var(--text-strong)">Two specialist portfolios.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));border-top:1px solid var(--border-strong)">
+        <article style="padding:28px 40px 8px 0;display:flex;flex-direction:column;gap:18px;border-right:1px solid var(--border-subtle)">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="width:150px;height:40px"><image-slot id="v3-logo-moly" shape="rect" fit="contain" placeholder="MOLYKOTE® logo"></image-slot></div><span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">A · DuPont</span></div>
+          <div style="position:relative;height:220px"><image-slot id="v3-brand-moly" shape="rect" placeholder="MOLYKOTE® image"></image-slot></div>
+          <h3 style="margin:0;font-size:24px;font-weight:400;letter-spacing:-.02em;color:var(--text-strong)">MOLYKOTE® <span style="color:var(--text-muted)">specialty lubrication</span></h3>
+          <p style="margin:0;font-size:15px;line-height:1.6">Specialty lubricants for demanding mechanical applications — from bearings and gears to threaded connections, plastic parts and assembly.</p>
+          <div style="display:flex;flex-direction:column">
+            <sc-for list="{{ molyCats }}" as="c" hint-placeholder-count="7">
+              <a onClick="{{ c.onClick }}" style="cursor:pointer;text-decoration:none;display:grid;grid-template-columns:32px 1fr 16px;gap:12px;padding:9px 0;border-top:1px solid var(--border-subtle);font-size:14px;color:var(--text-strong)" style-hover="color:var(--teal-700)"><span style="font-family:var(--font-mono);font-size:11px;color:var(--brass-600)">{{ c.n }}</span>{{ c.name }}<span style="color:var(--text-subtle)">→</span></a>
+            </sc-for>
+          </div>
+          <div><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" variant="secondary" icon-right="arrow-up-right" on-click="{{ go_molykote }}" hint-size="180px,40px">Explore MOLYKOTE®</x-import></div>
+        </article>
+        <article style="padding:28px 0 8px 40px;display:flex;flex-direction:column;gap:18px">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="width:150px;height:40px"><image-slot id="v3-logo-dow" shape="rect" fit="contain" placeholder="DOWSIL™ logo"></image-slot></div><span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">B · Dow</span></div>
+          <div style="position:relative;height:220px"><image-slot id="v3-brand-dow" shape="rect" placeholder="DOWSIL™ image"></image-slot></div>
+          <h3 style="margin:0;font-size:24px;font-weight:400;letter-spacing:-.02em;color:var(--text-strong)">DOWSIL™ <span style="color:var(--text-muted)">silicone technology</span></h3>
+          <p style="margin:0;font-size:15px;line-height:1.6">Silicone sealants, adhesives and materials for sealing, bonding and protecting components across industrial, automotive and electronics applications.</p>
+          <div style="display:flex;flex-direction:column">
+            <sc-for list="{{ dowFams }}" as="f" hint-placeholder-count="6">
+              <a onClick="{{ f.goTo }}" style="cursor:pointer;text-decoration:none;display:grid;grid-template-columns:32px 1fr auto;gap:12px;padding:9px 0;border-top:1px solid var(--border-subtle);font-size:14px;color:var(--text-strong)" style-hover="color:var(--teal-700)"><span style="font-family:var(--font-mono);font-size:11px;color:var(--brass-600)">{{ f.n }}</span>{{ f.name }}<span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:{{ f.stc }}">{{ f.st }}</span></a>
+            </sc-for>
+          </div>
+          <div><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" variant="secondary" icon-right="arrow-up-right" on-click="{{ go_dowsil }}" hint-size="170px,40px">Explore DOWSIL™</x-import></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 Portfolio: index table -->
+  <section data-screen-label="Home · Portfolio" style="background:var(--surface-sunken);border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle)">
+    <div style="max-width:1240px;margin:0 auto;padding:80px 32px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:24px;flex-wrap:wrap;margin-bottom:32px">
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)"><span style="color:var(--brass-600)">03</span> — Product portfolio</span>
+        <a onClick="{{ go_products }}" style="cursor:pointer;font-size:14px;color:var(--teal-700);text-decoration:none">Products overview →</a>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border-subtle)">
+        <div style="padding:12px 20px;background:var(--neutral-100);font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-strong)">A · MOLYKOTE® — by product family</div>
+        <sc-for list="{{ molyCats }}" as="c" hint-placeholder-count="7">
+          <a onClick="{{ c.onClick }}" style="cursor:pointer;text-decoration:none;display:grid;grid-template-columns:{{ idxCols }};gap:8px 24px;align-items:baseline;padding:16px 20px;border-top:1px solid var(--border-subtle)" style-hover="background:var(--teal-50)">
+            <span style="font-family:var(--font-mono);font-size:12px;color:var(--brass-600)">{{ c.n }}</span>
+            <span style="font-size:17px;color:var(--text-strong);letter-spacing:-.01em">{{ c.name }}</span>
+            <span style="font-size:14px;line-height:1.5;color:var(--text-muted)">{{ c.desc }}</span>
+            <span style="font-size:14px;color:var(--teal-700);text-align:right">→</span>
+          </a>
+        </sc-for>
+        <div style="padding:12px 20px;background:var(--neutral-100);border-top:1px solid var(--border-subtle);font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-strong)">B · DOWSIL™ — by material family</div>
+        <sc-for list="{{ dowFams }}" as="f" hint-placeholder-count="6">
+          <a onClick="{{ f.goTo }}" style="cursor:pointer;text-decoration:none;display:grid;grid-template-columns:{{ idxCols }};gap:8px 24px;align-items:baseline;padding:16px 20px;border-top:1px solid var(--border-subtle)" style-hover="background:var(--teal-50)">
+            <span style="font-family:var(--font-mono);font-size:12px;color:var(--brass-600)">{{ f.n }}</span>
+            <span style="font-size:17px;color:var(--text-strong);letter-spacing:-.01em">{{ f.name }}</span>
+            <span style="font-size:14px;line-height:1.5;color:var(--text-muted)">{{ f.desc }}</span>
+            <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:{{ f.stc }};text-align:right">{{ f.st }}</span>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 Applications: matrix -->
+  <section data-screen-label="Home · Applications" style="max-width:1240px;margin:0 auto;padding:80px 32px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:32px">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)"><span style="color:var(--brass-600)">04</span> — Applications &amp; industries</span>
+        <h2 style="margin:0;font-size:clamp(28px,2.8vw,36px);font-weight:400;letter-spacing:-.03em;color:var(--text-strong)">Start from your application.</h2>
+      </div>
+      <div style="display:flex;gap:24px;border-bottom:1px solid var(--border-subtle)">
+        <button onClick="{{ setTabApp }}" style="font:inherit;font-size:14px;padding:8px 0;border:0;background:none;cursor:pointer;color:{{ tabApp.tfg }};box-shadow:inset 0 -2px 0 {{ tabApp.bar }}">By application</button>
+        <button onClick="{{ setTabFam }}" style="font:inherit;font-size:14px;padding:8px 0;border:0;background:none;cursor:pointer;color:{{ tabFam.tfg }};box-shadow:inset 0 -2px 0 {{ tabFam.bar }}">By product family</button>
+      </div>
+    </div>
+    <sc-if value="{{ isTabApp }}" hint-placeholder-val="{{ true }}">
+      <div style="border-top:1px solid var(--border-strong)">
+        <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1.6fr) 110px 110px 24px;gap:24px;padding:10px 0;border-bottom:1px solid var(--border-subtle);font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)"><span>Application</span><span>Typical need</span><span>MOLYKOTE®</span><span>DOWSIL™</span><span></span></div>
+        </sc-if>
+        <sc-for list="{{ homeApps }}" as="a" hint-placeholder-count="6">
+          <a onClick="{{ a.onClick }}" style="cursor:pointer;text-decoration:none;display:grid;grid-template-columns:{{ mxCols }};gap:8px 24px;align-items:center;padding:16px 0;border-bottom:1px solid var(--border-subtle)" style-hover="background:var(--teal-50)">
+            <span style="display:flex;gap:12px;align-items:center;font-size:16px;color:var(--text-strong)"><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Icon" name="{{ a.icon }}" size="{{ 18 }}" color="var(--teal-700)" hint-size="18px,18px"></x-import>{{ a.name }}</span>
+            <span style="font-size:14px;color:var(--text-muted)">{{ a.desc }}</span>
+            <span style="font-family:var(--font-mono);font-size:12px;color:{{ a.mc }}">{{ a.mt }}</span>
+            <span style="font-family:var(--font-mono);font-size:12px;color:{{ a.dc }}">{{ a.dt }}</span>
+            <span style="color:var(--teal-700)">→</span>
+          </a>
+        </sc-for>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isTabFam }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:0 32px;border-top:1px solid var(--border-strong)">
+        <sc-for list="{{ famIndex }}" as="f" hint-placeholder-count="8">
+          <a onClick="{{ f.onClick }}" style="cursor:pointer;text-decoration:none;display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--border-subtle);font-size:15px;color:var(--text-strong)" style-hover="color:var(--teal-700)">{{ f.name }}<span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">{{ f.brand }}</span></a>
+        </sc-for>
+      </div>
+    </sc-if>
+  </section>
+
+  <!-- 6 Clients -->
+  <section data-screen-label="Home · Clients" style="border-top:1px solid var(--border-subtle)">
+    <div style="max-width:1240px;margin:0 auto;padding:64px 32px">
+      <span style="display:block;margin-bottom:28px;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)"><span style="color:var(--brass-600)">05</span> — Our clients</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:32px">
+        <sc-for list="{{ clients }}" as="c" hint-placeholder-count="6">
+          <div style="height:64px;filter:grayscale(1)"><image-slot id="v3-{{ c.id }}" shape="rect" fit="contain" placeholder="{{ c.name }}"></image-slot></div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 CTA -->
+  <section data-screen-label="Home · Contact CTA" style="max-width:1240px;margin:0 auto;padding:0 32px 88px">
+    <div style="background:var(--surface-tint);border:1px solid var(--teal-100);padding:56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px">
+      <div style="display:flex;flex-direction:column;gap:22px">
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)"><span style="color:var(--brass-600)">06</span> — Enquiries</span>
+        <h2 style="margin:0;font-size:clamp(30px,3.2vw,42px);font-weight:300;letter-spacing:-.035em;line-height:1.1;color:var(--text-strong);text-wrap:balance">Looking for the right industrial material for <span style="color:var(--teal-600)">your application?</span></h2>
+        <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" icon-right="arrow-up-right" on-click="{{ go_contact }}" hint-size="170px,40px">Contact Our Team</x-import>
+          <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" variant="ghost" on-click="{{ go_products }}" hint-size="160px,40px">Explore Products</x-import>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;border-top:1px solid var(--teal-200);align-self:end">
+        <a onClick="{{ enquireMoly }}" style="cursor:pointer;text-decoration:none;display:grid;grid-template-columns:32px 1fr 16px;gap:12px;padding:16px 0;border-bottom:1px solid var(--teal-200);font-size:16px;color:var(--text-strong)" style-hover="color:var(--teal-700)"><span style="font-family:var(--font-mono);font-size:11px;color:var(--brass-600)">A</span>Enquire about MOLYKOTE®<span>→</span></a>
+        <a onClick="{{ enquireDow }}" style="cursor:pointer;text-decoration:none;display:grid;grid-template-columns:32px 1fr 16px;gap:12px;padding:16px 0;border-bottom:1px solid var(--teal-200);font-size:16px;color:var(--text-strong)" style-hover="color:var(--teal-700)"><span style="font-family:var(--font-mono);font-size:11px;color:var(--brass-600)">B</span>Enquire about DOWSIL™<span>→</span></a>
+        <a onClick="{{ enquireGeneral }}" style="cursor:pointer;text-decoration:none;display:grid;grid-template-columns:32px 1fr 16px;gap:12px;padding:16px 0;border-bottom:1px solid var(--teal-200);font-size:16px;color:var(--text-strong)" style-hover="color:var(--teal-700)"><span style="font-family:var(--font-mono);font-size:11px;color:var(--brass-600)">C</span>Describe an application requirement<span>→</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<sc-if value="{{ is_molykote }}">
+<main data-screen-label="MOLYKOTE® brand page">
+  <section style="max-width:1240px;margin:0 auto;padding:48px 32px 56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:56px;align-items:end">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Products / <span style="color:var(--text-strong)">A · MOLYKOTE®</span></span>
+      <h1 style="margin:0;font-size:clamp(36px,4vw,52px);font-weight:300;letter-spacing:-.035em;line-height:1.06;color:var(--text-strong)">MOLYKOTE® <span style="color:var(--teal-600)">specialty lubricants.</span></h1>
+      <p style="margin:0;font-size:16px;line-height:1.6;max-width:520px">Greases, coatings, pastes, oils, compounds and dispersions engineered for conditions where conventional lubricants fall short. Browse by family, search by name or start from your application.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" icon-right="arrow-down" on-click="{{ toDir }}" hint-size="180px,40px">Product directory</x-import>
+        <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" variant="secondary" on-click="{{ enquireMoly }}" hint-size="190px,40px">Discuss an application</x-import>
+      </div>
+    </div>
+    <figure style="margin:0;display:flex;flex-direction:column;gap:8px">
+      <div style="position:relative;height:300px"><image-slot id="v3-moly-hero" shape="rect" placeholder="MOLYKOTE® · product in application"></image-slot></div>
+      <figcaption style="font-size:11px;color:var(--text-subtle)">MOLYKOTE® is a trademark of DuPont. Vishwas Enterprises is a distributor and does not manufacture these products.</figcaption>
+    </figure>
+  </section>
+
+  <section ref="{{ dirRef }}" style="border-top:1px solid var(--border-strong)">
+    <div style="max-width:1240px;margin:0 auto;padding:0 32px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));border-bottom:1px solid var(--border-subtle)">
+        <sc-for list="{{ catChips }}" as="c" hint-placeholder-count="8">
+          <button onClick="{{ c.onClick }}" style="font:inherit;cursor:pointer;text-align:left;border:0;background:{{ c.tint }};padding:16px 14px;display:flex;flex-direction:column;gap:4px;box-shadow:inset 0 -2px 0 {{ c.bar }}">
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--brass-600)">{{ c.n }}</span><span style="font-size:14px;color:{{ c.tfg }}">{{ c.name }}</span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;padding:24px 0;align-items:end">
+        <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Input" label="Search" icon="search" placeholder="Name, type or application" value="{{ q }}" on-change="{{ onQ }}" hint-size="100%,64px"></x-import>
+        <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Select" label="Application" options="{{ appOptions }}" value="{{ appVal }}" on-change="{{ onAppSel }}" hint-size="100%,64px"></x-import>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:10px"><span style="font-size:14px;color:var(--text-muted)">{{ resultLabel }}</span><a onClick="{{ clearFilters }}" style="cursor:pointer;font-size:13px;color:var(--teal-700)">Reset</a></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px;padding:20px 0 24px;border-top:1px solid var(--border-subtle)">
+        <div style="display:flex;gap:16px;align-items:baseline"><span style="font-family:var(--font-mono);font-size:12px;color:var(--brass-600)">{{ selCat.n }}</span><h2 style="margin:0;font-size:24px;font-weight:400;letter-spacing:-.02em;color:var(--text-strong)">{{ selCat.name }}</h2></div>
+        <p style="margin:0;font-size:14px;line-height:1.6;color:var(--text-muted)">{{ selCat.intro }}</p>
+      </div>
+      <div style="border-top:1px solid var(--border-strong)">
+        <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid;grid-template-columns:{{ tblCols }};gap:24px;padding:10px 0;border-bottom:1px solid var(--border-subtle);font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)"><span>Product</span><span>Description</span><span>Primary application</span><span>Key specifications</span><span style="text-align:right">Action</span></div>
+        </sc-if>
+        <sc-if value="{{ noResults }}"><div style="padding:32px 0;font-size:15px;color:var(--text-muted)">No products match these filters. <a onClick="{{ clearFilters }}" style="cursor:pointer;color:var(--teal-700)">Reset filters</a></div></sc-if>
+        <sc-for list="{{ products }}" as="p" hint-placeholder-count="6">
+          <div style="display:grid;grid-template-columns:{{ tblCols }};gap:12px 24px;padding:18px 0;border-bottom:1px solid var(--border-subtle);align-items:start" style-hover="background:var(--surface-sunken)">
+            <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:16px;color:var(--text-strong);letter-spacing:-.01em">{{ p.name }}</span><span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-700)">{{ p.catName }} · {{ p.type }}</span></div>
+            <span style="font-size:14px;line-height:1.5">{{ p.desc }}</span>
+            <span style="font-size:14px;line-height:1.5;color:var(--text-strong)">{{ p.app }}</span>
+            <div style="display:flex;flex-direction:column;gap:3px">
+              <sc-for list="{{ p.specs }}" as="s" hint-placeholder-count="2"><div style="display:grid;grid-template-columns:70px 1fr;gap:8px;font-family:var(--font-mono);font-size:12px"><span style="color:var(--text-subtle)">{{ s.k }}</span><span style="color:{{ s.c }}">{{ s.v }}</span></div></sc-for>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+              <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" size="s" variant="secondary" on-click="{{ p.onEnquire }}" hint-size="90px,32px">Enquire</x-import>
+              <span style="font-size:11px;color:var(--text-subtle)">TDS link to be added</span>
+            </div>
+          </div>
+        </sc-for>
+        <p style="margin:0;padding:14px 0;font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--amber-600)">Representative entries · values to be verified against current manufacturer TDS · availability to be confirmed</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--surface-sunken);border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle)">
+    <div style="max-width:1240px;margin:0 auto;padding:72px 32px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:32px;margin-bottom:28px">
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Application-led discovery</span>
+        <h2 style="margin:0;font-size:clamp(26px,2.6vw,32px);font-weight:400;letter-spacing:-.025em;color:var(--text-strong)">Don't know the product name? Start from the application.</h2>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border-subtle)">
+        <sc-for list="{{ molyApps }}" as="a" hint-placeholder-count="7">
+          <a onClick="{{ a.onClick }}" style="cursor:pointer;text-decoration:none;display:grid;grid-template-columns:{{ appCols }};gap:8px 24px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--border-subtle)" style-hover="background:var(--teal-50)">
+            <span style="display:flex;gap:12px;align-items:center;font-size:15px;color:var(--text-strong)"><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Icon" name="{{ a.icon }}" size="{{ 18 }}" color="var(--teal-700)" hint-size="18px,18px"></x-import>{{ a.name }}</span>
+            <span style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted)">{{ a.prods }}</span>
+            <span style="font-size:13px;color:var(--teal-700);text-align:right">Filter ↑</span>
+          </a>
+        </sc-for>
+      </div>
+      <p style="margin:16px 0 0;font-size:13px;color:var(--text-muted)">Final selection should consider substrate, load, speed and operating temperature — our team can help.</p>
+    </div>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:72px 32px 88px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:32px">
+    <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Technical resources</span>
+    <div style="display:flex;flex-direction:column;border-top:1px solid var(--border-strong);grid-column:span 2;min-width:0">
+      <div style="display:grid;grid-template-columns:160px 1fr auto;gap:16px;padding:14px 0;border-bottom:1px solid var(--border-subtle);align-items:baseline"><span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Manufacturer · DuPont</span><span style="font-size:15px;color:var(--text-strong)">Technical datasheets</span><span style="font-size:12px;color:var(--text-subtle)">Per product · to be linked</span></div>
+      <div style="display:grid;grid-template-columns:160px 1fr auto;gap:16px;padding:14px 0;border-bottom:1px solid var(--border-subtle);align-items:baseline"><span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Manufacturer · DuPont</span><span style="font-size:15px;color:var(--text-strong)">Application guide</span><span style="font-size:12px;color:var(--text-subtle)">Official source to be linked</span></div>
+      <a onClick="{{ go_insights }}" style="cursor:pointer;text-decoration:none;display:grid;grid-template-columns:160px 1fr auto;gap:16px;padding:14px 0;border-bottom:1px solid var(--border-subtle);align-items:baseline" style-hover="background:var(--teal-50)"><span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Vishwas Enterprises</span><span style="font-size:15px;color:var(--text-strong)">Videos &amp; case studies</span><span style="font-size:12px;color:var(--teal-700)">Insights →</span></a>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<sc-if value="{{ is_dowsil }}">
+<main data-screen-label="DOWSIL™ brand page">
+  <section style="max-width:1240px;margin:0 auto;padding:48px 32px 56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:56px;align-items:end">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Products / <span style="color:var(--text-strong)">B · DOWSIL™</span></span>
+      <h1 style="margin:0;font-size:clamp(36px,4vw,52px);font-weight:300;letter-spacing:-.035em;line-height:1.06;color:var(--text-strong)">DOWSIL™ <span style="color:var(--teal-600)">silicone technology.</span></h1>
+      <p style="margin:0;font-size:16px;line-height:1.6;max-width:520px">Silicone sealants, adhesives and materials for sealing, bonding, protection and performance. The right product depends on your application, substrates, environment, performance needs and process.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" icon-right="arrow-down" on-click="{{ toFams }}" hint-size="220px,40px">Explore product categories</x-import>
+        <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" variant="secondary" on-click="{{ enquireDow }}" hint-size="190px,40px">Discuss a requirement</x-import>
+      </div>
+    </div>
+    <figure style="margin:0;display:flex;flex-direction:column;gap:8px">
+      <div style="position:relative;height:300px"><image-slot id="v3-dow-hero" shape="rect" placeholder="DOWSIL™ · silicone in application"></image-slot></div>
+      <figcaption style="font-size:11px;color:var(--text-subtle)">DOWSIL™ is a trademark of Dow. Vishwas Enterprises is a distributor and does not manufacture these products.</figcaption>
+    </figure>
+  </section>
+
+  <section style="border-top:1px solid var(--border-strong);border-bottom:1px solid var(--border-subtle)">
+    <div style="max-width:1240px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))">
+      <sc-for list="{{ dowFactors }}" as="f" hint-placeholder-count="5">
+        <div style="padding:24px 20px 24px 0;display:flex;flex-direction:column;gap:6px;border-right:1px solid var(--border-subtle)"><span style="font-family:var(--font-mono);font-size:11px;color:var(--brass-600)">{{ f.n }}</span><span style="font-size:15px;color:var(--text-strong)">{{ f.k }}</span><span style="font-size:13px;line-height:1.5;color:var(--text-muted)">{{ f.v }}</span></div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:72px 32px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:32px;margin-bottom:28px">
+      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)"><span style="color:var(--brass-600)">01</span> — Application pathways</span>
+      <h2 style="margin:0;font-size:clamp(26px,2.6vw,32px);font-weight:400;letter-spacing:-.025em;color:var(--text-strong)">Start with what the material must do.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));border:1px solid var(--border-subtle)">
+      <sc-for list="{{ dowPaths }}" as="p" hint-placeholder-count="6">
+        <button onClick="{{ p.onClick }}" style="font:inherit;cursor:pointer;text-align:left;border:0;border-right:1px solid var(--border-subtle);background:{{ p.tint }};padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:inset 0 -2px 0 {{ p.bar }}">
+          <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Icon" name="{{ p.icon }}" size="{{ 18 }}" color="var(--teal-700)" hint-size="18px,18px"></x-import><span style="font-size:14px;color:{{ p.tfg }}">{{ p.name }}</span>
+        </button>
+      </sc-for>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:32px;padding:28px 0;border-bottom:1px solid var(--border-subtle)">
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Requirement</span><span style="font-size:20px;letter-spacing:-.015em;color:var(--text-strong)">{{ selPath.name }}</span><span style="font-size:14px;line-height:1.55">{{ selPath.q }}</span></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Consider</span><span style="font-family:var(--font-mono);font-size:13px;line-height:1.7;color:var(--text-strong)">{{ selPath.consider }}</span></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Relevant families</span>
+        <sc-for list="{{ selPathFams }}" as="f" hint-placeholder-count="2"><a onClick="{{ f.onClick }}" style="cursor:pointer;font-size:14px;color:var(--teal-700);text-decoration:none">{{ f.name }} ↓</a></sc-for>
+        <a onClick="{{ enquirePath }}" style="cursor:pointer;margin-top:8px;font-size:14px;color:var(--text-strong)">Discuss this application →</a>
+      </div>
+    </div>
+  </section>
+
+  <section ref="{{ famRef }}" style="background:var(--surface-sunken);border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle)">
+    <div style="max-width:1240px;margin:0 auto;padding:72px 32px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:32px;margin-bottom:28px">
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)"><span style="color:var(--brass-600)">02</span> — Portfolio organisation</span>
+        <h2 style="margin:0;font-size:clamp(26px,2.6vw,32px);font-weight:400;letter-spacing:-.025em;color:var(--text-strong)">Material families.</h2>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border-subtle)">
+        <sc-for list="{{ dowFams }}" as="f" hint-placeholder-count="6">
+          <a onClick="{{ f.onClick }}" style="cursor:pointer;text-decoration:none;display:grid;grid-template-columns:{{ idxCols }};gap:8px 24px;align-items:baseline;padding:16px 20px;border-bottom:1px solid var(--border-subtle)" style-hover="background:var(--teal-50)">
+            <span style="font-family:var(--font-mono);font-size:12px;color:var(--brass-600)">{{ f.n }}</span>
+            <span style="font-size:16px;color:var(--text-strong)">{{ f.name }}</span>
+            <span style="font-size:14px;line-height:1.5;color:var(--text-muted)">{{ f.desc }}</span>
+            <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:{{ f.stc }};text-align:right">{{ f.st }}</span>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section ref="{{ dowRef }}" style="max-width:1240px;margin:0 auto;padding:72px 32px 88px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:24px;flex-wrap:wrap;margin-bottom:20px">
+      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)"><span style="color:var(--brass-600)">03</span> — Product information</span>
+      <div style="display:flex;flex-wrap:wrap;gap:20px">
+        <sc-for list="{{ famChips }}" as="c" hint-placeholder-count="5">
+          <button onClick="{{ c.onClick }}" style="font:inherit;font-size:13px;cursor:pointer;padding:6px 0;border:0;background:none;color:{{ c.tfg }};box-shadow:inset 0 -1px 0 {{ c.bar }}">{{ c.name }}</button>
+        </sc-for>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--border-strong)">
+      <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:{{ tblCols }};gap:24px;padding:10px 0;border-bottom:1px solid var(--border-subtle);font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)"><span>Product</span><span>Description</span><span>Documented application</span><span>Properties</span><span style="text-align:right">Action</span></div>
+      </sc-if>
+      <sc-for list="{{ dowProds }}" as="p" hint-placeholder-count="5">
+        <div style="display:grid;grid-template-columns:{{ tblCols }};gap:12px 24px;padding:18px 0;border-bottom:1px solid var(--border-subtle);align-items:start" style-hover="background:var(--surface-sunken)">
+          <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:16px;color:var(--text-strong)">{{ p.name }}</span><span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-700)">{{ p.famName }} · {{ p.type }}</span></div>
+          <span style="font-size:14px;line-height:1.5">{{ p.desc }}</span>
+          <span style="font-size:14px;line-height:1.5;color:var(--text-strong)">{{ p.app }}</span>
+          <div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ p.props }}" as="t" hint-placeholder-count="2"><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Tag" hint-size="80px,24px">{{ t }}</x-import></sc-for></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end"><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" size="s" variant="secondary" on-click="{{ p.onEnquire }}" hint-size="90px,32px">Enquire</x-import><span style="font-size:11px;color:var(--text-subtle)">TDS link to be added</span></div>
+        </div>
+      </sc-for>
+      <p style="margin:0;padding:14px 0;font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--amber-600)">Representative entries · availability and details to be confirmed</p>
+    </div>
+    <div style="margin-top:40px;padding:32px;background:var(--surface-tint);border:1px solid var(--teal-100);display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center">
+      <div style="display:flex;flex-direction:column;gap:6px;max-width:640px"><span style="font-size:20px;color:var(--text-strong);letter-spacing:-.015em">Not sure which product you need?</span><span style="font-size:14px;color:var(--text-muted)">Describe the application, substrates and service conditions. We'll guide you to a suitable family.</span></div>
+      <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" icon-right="arrow-up-right" on-click="{{ enquireDow }}" hint-size="200px,40px">Describe your application</x-import>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<sc-if value="{{ is_products }}">
+<main data-screen-label="Products overview">
+  <section style="background:#fff;border-bottom:1px solid var(--border-strong)">
+    <div style="max-width:1240px;margin:0 auto;padding:48px 32px;display:flex;flex-direction:column;gap:16px">
+      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Home / Products</span>
+      <h1 style="margin:0;font-size:clamp(34px,3.8vw,48px);font-weight:300;letter-spacing:-.035em;line-height:1.05;color:var(--text-strong)">Products</h1>
+      <p style="margin:0;font-size:18px;max-width:620px;line-height:1.55">Two portfolios, organised the way each is specified: MOLYKOTE® by product family, DOWSIL™ by application and material.</p>
+    </div>
+  </section>
+  <section style="max-width:1240px;margin:0 auto;padding:72px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:48px">
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="position:relative;height:180px"><image-slot id="v3-po-moly" shape="rect" placeholder="MOLYKOTE® image"></image-slot></div>
+      <h2 style="margin:0;font-size:32px;font-weight:400;letter-spacing:-.03em;color:var(--text-strong)">MOLYKOTE® <span style="color:var(--text-muted)">specialty lubricants</span></h2>
+      <div style="display:flex;flex-direction:column;border-top:1px solid var(--border-subtle)">
+        <sc-for list="{{ molyCats }}" as="c" hint-placeholder-count="7">
+          <a onClick="{{ c.onClick }}" style="cursor:pointer;text-decoration:none;display:grid;grid-template-columns:40px minmax(0,1fr) 20px;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid var(--border-subtle)" style-hover="background:var(--teal-50)">
+            <span style="font-family:var(--font-mono);font-size:13px;color:var(--brass-600)">{{ c.n }}</span><span style="font-size:16px;color:var(--text-strong)">{{ c.name }}</span>
+            <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Icon" name="arrow-up-right" size="{{ 16 }}" color="var(--teal-700)" hint-size="16px,16px"></x-import>
+          </a>
+        </sc-for>
+      </div>
+      <div><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" icon-right="arrow-up-right" on-click="{{ go_molykote }}" hint-size="180px,40px">Explore MOLYKOTE®</x-import></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="position:relative;height:180px"><image-slot id="v3-po-dow" shape="rect" placeholder="DOWSIL™ image"></image-slot></div>
+      <h2 style="margin:0;font-size:32px;font-weight:400;letter-spacing:-.03em;color:var(--text-strong)">DOWSIL™ <span style="color:var(--text-muted)">silicone technology</span></h2>
+      <div style="display:flex;flex-direction:column;border-top:1px solid var(--border-subtle)">
+        <sc-for list="{{ dowFams }}" as="f" hint-placeholder-count="6">
+          <a onClick="{{ f.goTo }}" style="cursor:pointer;text-decoration:none;display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid var(--border-subtle)" style-hover="background:var(--teal-50)">
+            <span style="font-family:var(--font-mono);font-size:13px;color:var(--brass-600)">{{ f.n }}</span><span style="font-size:16px;color:var(--text-strong)">{{ f.name }}</span>
+            <sc-if value="{{ f.notConfirmed }}"><span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-600)">To confirm</span></sc-if>
+          </a>
+        </sc-for>
+      </div>
+      <div><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" icon-right="arrow-up-right" on-click="{{ go_dowsil }}" hint-size="170px,40px">Explore DOWSIL™</x-import></div>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<sc-if value="{{ is_about }}">
+<main data-screen-label="About Us">
+  <section style="max-width:1240px;margin:0 auto;padding:64px 32px 88px;display:flex;flex-wrap:wrap;gap:56px">
+    <div style="flex:1 1 380px;display:flex;flex-direction:column;gap:24px;justify-content:center">
+      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">About Us</span>
+      <h1 style="margin:0;font-size:clamp(34px,3.8vw,48px);font-weight:300;letter-spacing:-.035em;line-height:1.04;color:var(--text-strong)">An experienced partner in <span style="color:var(--teal-600)">specialty materials.</span></h1>
+      <p style="margin:0;font-size:18px;line-height:1.6;max-width:520px">Vishwas Enterprises is an industrial materials distributor with 25 years of experience serving customers across North India. We represent MOLYKOTE® specialty lubricants by DuPont and DOWSIL™ silicone products by Dow.</p>
+    </div>
+    <div style="flex:1.2 1 460px;position:relative;min-height:320px"><image-slot id="v3-about-hero" shape="rect" placeholder="Company image · team, premises or customer application"></image-slot></div>
+  </section>
+  <section style="background:var(--surface-sunken);border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle)">
+    <div style="max-width:1240px;margin:0 auto;padding:72px 32px">
+      <div style="display:flex;flex-direction:column;gap:20px;margin-bottom:40px">
+        <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Eyebrow" index="01" hint-size="220px,16px">The role of a distributor</x-import>
+        <h2 style="margin:0;font-size:clamp(26px,2.6vw,32px);font-weight:400;letter-spacing:-.03em;color:var(--text-strong);max-width:640px">From requirement to the right material.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px">
+        <sc-for list="{{ role }}" as="r" hint-placeholder-count="4">
+          <div style="background:#fff;border:1px solid var(--border-subtle);border-radius:2px;padding:28px;display:flex;flex-direction:column;gap:10px"><span style="font-family:var(--font-mono);font-size:13px;color:var(--brass-600)">{{ r.n }}</span><span style="font-size:18px;color:var(--text-strong)">{{ r.k }}</span><span style="font-size:14px;line-height:1.55;color:var(--text-muted)">{{ r.v }}</span></div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+  <section style="max-width:1240px;margin:0 auto;padding:72px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:64px">
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Eyebrow" index="02" hint-size="200px,16px">Coverage</x-import>
+      <h2 style="margin:0;font-size:clamp(26px,2.6vw,32px);font-weight:400;letter-spacing:-.03em;color:var(--text-strong)">Serving North India.</h2>
+      <p style="margin:0;font-size:16px;line-height:1.6">We supply manufacturing, OEM and maintenance customers across the region.</p>
+      <div style="padding:20px;border:1px dashed var(--border-default);font-size:14px;color:var(--text-subtle)">[States, cities or industrial clusters served — to be supplied]</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Eyebrow" index="03" hint-size="200px,16px">Company information</x-import>
+      <div style="padding:20px;border:1px dashed var(--border-default);font-size:14px;color:var(--text-subtle);line-height:1.7">[Company story, leadership and history — to be supplied by Vishwas Enterprises. No founding date, milestones, facilities or figures are shown until confirmed.]</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap"><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" icon-right="arrow-up-right" on-click="{{ go_products }}" hint-size="170px,40px">Explore Products</x-import><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" variant="secondary" on-click="{{ go_contact }}" hint-size="180px,40px">Contact Our Team</x-import></div>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<sc-if value="{{ is_insights }}">
+<main data-screen-label="Insights & Case Studies">
+  <section style="background:#fff;border-bottom:1px solid var(--border-strong)">
+    <div style="max-width:1240px;margin:0 auto;padding:48px 32px;display:flex;flex-direction:column;gap:16px">
+      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Insights &amp; Case Studies</span>
+      <h1 style="margin:0;font-size:clamp(34px,3.8vw,48px);font-weight:300;letter-spacing:-.035em;line-height:1.05;color:var(--text-strong)">Technical resources <span style="color:var(--teal-600)">and application stories.</span></h1>
+      <p style="margin:0;font-size:17px;max-width:640px;line-height:1.55;color:var(--text-muted)">Manufacturer material is attributed and links to its original source. Items marked placeholder await verified content.</p>
+    </div>
+  </section>
+  <section style="max-width:1240px;margin:0 auto;padding:88px 32px 48px">
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:32px"><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Eyebrow" index="A" hint-size="260px,16px">Latest updates &amp; product launches</x-import></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:16px">
+      <sc-for list="{{ updates }}" as="u" hint-placeholder-count="4">
+        <a href="{{ u.href }}" target="_blank" rel="noopener" style="text-decoration:none;border:1px solid var(--border-subtle);border-radius:2px;padding:24px;display:flex;flex-direction:column;gap:12px;min-height:220px;background:{{ u.bg }}" style-hover="border-color:var(--teal-600)">
+          <div style="display:flex;justify-content:space-between;gap:8px"><span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-700)">{{ u.kind }}</span><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-subtle)">{{ u.src }}</span></div>
+          <span style="font-size:18px;line-height:1.35;color:var(--text-strong);letter-spacing:-.01em">{{ u.title }}</span>
+          <span style="margin-top:auto;font-size:13px;color:var(--text-subtle)">{{ u.foot }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+  <section style="max-width:1240px;margin:0 auto;padding:48px 32px">
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:32px"><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Eyebrow" index="B" hint-size="160px,16px">Case studies</x-import></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:24px">
+      <sc-for list="{{ cases }}" as="c" hint-placeholder-count="3">
+        <article style="border:1px solid var(--border-subtle);border-radius:2px;display:flex;flex-direction:column">
+          <div style="position:relative;height:200px"><image-slot id="v3-case-{{ c.id }}" shape="rect" placeholder="Application photograph"></image-slot></div>
+          <div style="padding:24px;display:flex;flex-direction:column;gap:12px">
+            <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">{{ c.ind }}</span>
+            <span style="font-size:19px;color:var(--text-strong);letter-spacing:-.015em">{{ c.title }}</span>
+            <div style="display:flex;flex-direction:column;border-top:1px solid var(--border-subtle);font-size:13px">
+              <div style="display:grid;grid-template-columns:84px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid var(--border-subtle)"><span style="color:var(--text-subtle)">Material</span><span>{{ c.fam }}</span></div>
+              <div style="display:grid;grid-template-columns:84px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid var(--border-subtle)"><span style="color:var(--text-subtle)">Challenge</span><span>{{ c.challenge }}</span></div>
+              <div style="display:grid;grid-template-columns:84px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid var(--border-subtle)"><span style="color:var(--text-subtle)">Solution</span><span>{{ c.solution }}</span></div>
+              <div style="display:grid;grid-template-columns:84px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid var(--border-subtle)"><span style="color:var(--text-subtle)">Outcome</span><span>{{ c.outcome }}</span></div>
+            </div>
+            <span style="font-size:12px;color:var(--text-subtle)">Source link to be added</span>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+  <section style="max-width:1240px;margin:0 auto;padding:48px 32px 104px">
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:32px"><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Eyebrow" index="C" hint-size="260px,16px">Videos &amp; technical resources</x-import></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:24px;margin-bottom:32px">
+      <sc-for list="{{ videos }}" as="v" hint-placeholder-count="3">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="position:relative;aspect-ratio:16/9"><image-slot id="v3-vid-{{ v.id }}" shape="rect" placeholder="Video thumbnail"></image-slot></div>
+          <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-700)">{{ v.kind }}</span>
+          <span style="font-size:17px;color:var(--text-strong)">{{ v.title }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display:flex;flex-direction:column;border-top:1px solid var(--border-default)">
+      <sc-for list="{{ docs }}" as="d" hint-placeholder-count="3">
+        <a href="{{ d.href }}" target="_blank" rel="noopener" style="text-decoration:none;display:grid;grid-template-columns:160px minmax(0,1fr) 20px;gap:24px;align-items:center;padding:16px 0;border-bottom:1px solid var(--border-subtle)" style-hover="background:var(--teal-50)">
+          <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">{{ d.kind }}</span><span style="font-size:16px;color:var(--text-strong)">{{ d.title }}</span>
+          <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Icon" name="{{ d.icon }}" size="{{ 16 }}" color="var(--teal-700)" hint-size="16px,16px"></x-import>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<sc-if value="{{ is_contact }}">
+<main data-screen-label="Contact / Enquiry">
+  <section style="max-width:1240px;margin:0 auto;padding:64px 32px 104px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:64px">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Contact Us</span>
+      <h1 style="margin:0;font-size:clamp(34px,3.8vw,48px);font-weight:300;letter-spacing:-.035em;line-height:1.05;color:var(--text-strong)">Tell us about <span style="color:var(--teal-600)">your requirement.</span></h1>
+      <p style="margin:0;font-size:17px;line-height:1.55;max-width:460px">Ask about a specific product, or describe the application and operating conditions if you don't know which product you need.</p>
+      <div style="display:flex;flex-direction:column;border-top:1px solid var(--border-subtle);margin-top:12px">
+        <div style="display:grid;grid-template-columns:28px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid var(--border-subtle)"><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Icon" name="map-pin" size="{{ 18 }}" color="var(--teal-700)" hint-size="18px,18px"></x-import><span style="font-size:15px;color:var(--text-subtle)">[Business address — to be supplied]</span></div>
+        <div style="display:grid;grid-template-columns:28px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid var(--border-subtle)"><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Icon" name="phone" size="{{ 18 }}" color="var(--teal-700)" hint-size="18px,18px"></x-import><span style="font-size:15px;color:var(--text-subtle)">[Phone — to be supplied]</span></div>
+        <div style="display:grid;grid-template-columns:28px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid var(--border-subtle)"><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Icon" name="mail" size="{{ 18 }}" color="var(--teal-700)" hint-size="18px,18px"></x-import><span style="font-size:15px;color:var(--text-subtle)">[Business email — to be supplied]</span></div>
+        <div style="display:grid;grid-template-columns:28px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid var(--border-subtle)"><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Icon" name="map" size="{{ 18 }}" color="var(--teal-700)" hint-size="18px,18px"></x-import><span style="font-size:15px;color:var(--text-body)">Service coverage · North India</span></div>
+      </div>
+    </div>
+    <div style="border:1px solid var(--border-subtle);border-radius:2px;padding:40px;background:#fff">
+      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+            <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Input" label="Name" value="{{ form.name }}" on-change="{{ setName }}" error="{{ err.name }}" hint-size="100%,64px"></x-import>
+            <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Input" label="Company" value="{{ form.company }}" on-change="{{ setCompany }}" error="{{ err.company }}" hint-size="100%,64px"></x-import>
+            <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Input" label="Work email" type="email" value="{{ form.email }}" on-change="{{ setEmail }}" error="{{ err.email }}" hint-size="100%,64px"></x-import>
+            <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Input" label="Phone number" hint="Optional" value="{{ form.phone }}" on-change="{{ setPhone }}" error="{{ err.phone }}" hint-size="100%,64px"></x-import>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <span style="font-size:13px;color:var(--text-strong)">Brand of interest</span>
+            <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--border-default);border-radius:2px">
+              <sc-for list="{{ brandOpts }}" as="b" hint-placeholder-count="3">
+                <button type="button" onClick="{{ b.onClick }}" style="font:inherit;font-size:14px;cursor:pointer;padding:11px 8px;border:0;border-left:1px solid var(--border-subtle);background:{{ b.bg }};color:{{ b.fg }}">{{ b.label }}</button>
+              </sc-for>
+            </div>
+            <sc-if value="{{ err.brand }}"><span style="font-size:12px;color:var(--status-danger)">{{ err.brand }}</span></sc-if>
+          </div>
+          <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Input" label="Product or application requirement" placeholder="e.g. MOLYKOTE® 111, or: grease for plastic gears at 120 °C" value="{{ form.req }}" on-change="{{ setReq }}" error="{{ err.req }}" hint-size="100%,64px"></x-import>
+          <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Input" label="Message" multiline="{{ true }}" rows="{{ 4 }}" placeholder="Part, substrates, operating conditions, quantities…" value="{{ form.msg }}" on-change="{{ setMsg }}" hint-size="100%,120px"></x-import>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+            <span style="font-size:12px;color:var(--text-subtle)">Prototype: submissions are simulated and not sent.</span>
+            <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" size="l" icon-right="arrow-up-right" on-click="{{ submit }}" hint-size="180px,48px">Send enquiry</x-import>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ sent }}">
+        <div style="display:flex;flex-direction:column;gap:16px;align-items:flex-start;padding:24px 0">
+          <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Icon" name="circle-check" size="{{ 32 }}" color="var(--status-success)" hint-size="32px,32px"></x-import>
+          <h2 style="margin:0;font-size:28px;font-weight:400;letter-spacing:-.02em;color:var(--text-strong)">Enquiry ready to send.</h2>
+          <p style="margin:0;font-size:15px;line-height:1.55;color:var(--text-muted)">This is a prototype — no message has been sent. In the live site, your enquiry about <b style="font-weight:500;color:var(--text-strong)">{{ form.req }}</b> would go to our team.</p>
+          <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" variant="secondary" on-click="{{ resetForm }}" hint-size="160px,40px">New enquiry</x-import>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+
+
+<footer style="background:var(--surface-sunken);border-top:1px solid var(--border-subtle)">
+  <div style="max-width:1240px;margin:0 auto;padding:64px 32px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:40px">
+    <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
+      <span style="font-size:18px;letter-spacing:-.03em;color:var(--text-strong)"><span style="font-weight:600">Vishwas</span> Enterprises</span>
+      <p style="margin:0;font-size:13px;line-height:1.6;color:var(--text-muted)">Authorised distributor of MOLYKOTE® specialty lubricants and DOWSIL™ silicone products. 25 years serving industrial customers across North India.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;font-size:14px">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Company</span>
+      <a onClick="{{ go_home }}" style="cursor:pointer;color:var(--text-body);text-decoration:none" style-hover="color:var(--teal-700)">Home</a>
+      <a onClick="{{ go_about }}" style="cursor:pointer;color:var(--text-body);text-decoration:none" style-hover="color:var(--teal-700)">About Us</a>
+      <a onClick="{{ go_insights }}" style="cursor:pointer;color:var(--text-body);text-decoration:none" style-hover="color:var(--teal-700)">Insights &amp; Case Studies</a>
+      <a onClick="{{ go_contact }}" style="cursor:pointer;color:var(--text-body);text-decoration:none" style-hover="color:var(--teal-700)">Contact Us</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;font-size:14px">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Products</span>
+      <a onClick="{{ go_products }}" style="cursor:pointer;color:var(--text-body);text-decoration:none" style-hover="color:var(--teal-700)">Products overview</a>
+      <a onClick="{{ go_molykote }}" style="cursor:pointer;color:var(--text-body);text-decoration:none" style-hover="color:var(--teal-700)">MOLYKOTE®</a>
+      <a onClick="{{ go_dowsil }}" style="cursor:pointer;color:var(--text-body);text-decoration:none" style-hover="color:var(--teal-700)">DOWSIL™</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;font-size:14px">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Contact</span>
+      <span style="color:var(--text-subtle)">[Business address]</span>
+      <span style="color:var(--text-subtle)">[Phone]</span>
+      <span style="color:var(--text-subtle)">[Business email]</span>
+      <span style="color:var(--text-body)">Coverage · North India</span>
+    </div>
+  </div>
+  <div style="max-width:1240px;margin:0 auto;padding:16px 32px 28px;border-top:1px solid var(--border-subtle);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--text-subtle)">
+    <span>© Vishwas Enterprises. MOLYKOTE® is a trademark of DuPont. DOWSIL™ is a trademark of Dow.</span>
+    <span>[Social links — if supplied]</span>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  V = { navOn: 'var(--text-strong)', navOff: 'var(--text-muted)', bar: 'var(--teal-600)', onBg: 'var(--teal-700)', onFg: '#fff', offBg: '#fff', offFg: 'var(--text-body)', offBd: 'var(--border-default)', tintOn: 'var(--teal-50)', tintOff: 'transparent', tfgOn: 'var(--teal-800)', tfgOff: 'var(--text-body)', spec: 'var(--text-strong)', narrowAt: 900 };
+  state = { page: 'home', dd: false, mob: false, narrow: false, q: '', cat: 'all', app: 'all', dpath: 0, dfam: 'all', tab: 'app', happ: 0, form: { name: '', company: '', email: '', phone: '', brand: '', req: '', msg: '' }, errors: {}, sent: false, D: window.VE || null };
+  dirRef = React.createRef(); dowRef = React.createRef(); famRef = React.createRef();
+  componentDidMount() {
+    const chk = () => { if (window.VE) this.setState({ D: window.VE }); else this.t = setTimeout(chk, 40); };
+    if (!this.state.D) chk();
+    this.onR = () => this.setState({ narrow: window.innerWidth < this.V.narrowAt });
+    this.onR(); window.addEventListener('resize', this.onR);
+    const h = (location.hash || '').slice(1);
+    if (['home','products','molykote','dowsil','about','insights','contact'].includes(h)) this.setState({ page: h });
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); clearTimeout(this.t); }
+  top(ref) { const el = ref && ref.current; return el ? el.getBoundingClientRect().top + window.scrollY - 88 : 0; }
+  go(page, extra, ref) {
+    this.setState({ page, dd: false, mob: false, ...(extra || {}) }, () => window.scrollTo({ top: this.top(ref) }));
+    try { history.replaceState(null, '', '#' + page); } catch (e) {}
+  }
+  scrollTo(ref) { window.scrollTo({ top: this.top(ref), behavior: 'smooth' }); }
+  chip(on) { const V = this.V; return { on, bg: on ? V.onBg : V.offBg, fg: on ? V.onFg : V.offFg, bd: on ? V.onBg : V.offBd, tint: on ? V.tintOn : V.tintOff, tfg: on ? V.tfgOn : V.tfgOff, bar: on ? V.bar : 'transparent', arrow: on ? V.bar : 'var(--neutral-400)', dfg: on ? 'var(--mint-300)' : 'var(--teal-50)', dbar: on ? 'var(--mint-300)' : 'transparent', sbg: on ? 'var(--teal-900)' : 'var(--surface-sunken)', sfg: on ? '#fff' : 'var(--text-body)' }; }
+  enquire(brand, req) { this.go('contact', { form: { ...this.state.form, brand, req: req || '' }, sent: false, errors: {} }); }
+  setF(k) { return e => { const v = e && e.target ? e.target.value : e; this.setState(s => ({ form: { ...s.form, [k]: v }, errors: { ...s.errors, [k]: undefined } })); }; }
+  submit() {
+    const f = this.state.form, er = {};
+    if (!f.name.trim()) er.name = 'Please enter your name.';
+    if (!f.company.trim()) er.company = 'Please enter your company.';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim())) er.email = 'Enter a valid work email.';
+    if (f.phone.trim() && !/^[+\d][\d\s-]{6,}$/.test(f.phone.trim())) er.phone = 'Enter a valid phone number.';
+    if (!f.brand) er.brand = 'Choose a brand or general enquiry.';
+    if (!f.req.trim()) er.req = 'Describe the product or application.';
+    this.setState(Object.keys(er).length ? { errors: er } : { sent: true, errors: {} });
+  }
+  renderVals() {
+    const s = this.state, D = s.D, V = this.V;
+    const P = ['home','products','molykote','dowsil','about','insights','contact'];
+    const out = { narrow: s.narrow, wide: !s.narrow, dd: s.dd, mob: s.mob, mobIcon: s.mob ? 'x' : 'menu',
+      ddOpen: () => this.setState({ dd: true }), ddClose: () => this.setState({ dd: false }), ddToggle: () => this.setState(x => ({ dd: !x.dd })),
+      mobToggle: () => this.setState(x => ({ mob: !x.mob })), dirRef: this.dirRef, dowRef: this.dowRef, famRef: this.famRef,
+      dirCols: s.narrow ? 'minmax(0,1fr)' : '240px minmax(0,1fr)',
+      toDir: () => this.scrollTo(this.dirRef), toFams: () => this.scrollTo(this.famRef) };
+    P.forEach(p => { out['is_' + p] = s.page === p; out['go_' + p] = () => this.go(p); });
+    out.nav = [['Home','home'],['Products','products'],['About Us','about'],['Insights & Case Studies','insights']].map(([label, p]) => {
+      const on = s.page === p || (p === 'products' && (s.page === 'molykote' || s.page === 'dowsil'));
+      return { label, onClick: () => this.go(p), color: on ? V.navOn : V.navOff, bar: on ? V.bar : 'transparent', isProducts: p === 'products', notProducts: p !== 'products', on };
+    });
+    const brandName = { molykote: 'MOLYKOTE®', dowsil: 'DOWSIL™', general: 'General enquiry' };
+    out.enquireMoly = () => this.enquire('molykote'); out.enquireDow = () => this.enquire('dowsil'); out.enquireGeneral = () => this.enquire('general');
+    const f = s.form;
+    Object.assign(out, { form: f, err: s.errors, sent: s.sent, notSent: !s.sent, submit: () => this.submit(), resetForm: () => this.setState({ sent: false, form: { name: '', company: '', email: '', phone: '', brand: '', req: '', msg: '' } }),
+      setName: this.setF('name'), setCompany: this.setF('company'), setEmail: this.setF('email'), setPhone: this.setF('phone'), setReq: this.setF('req'), setMsg: this.setF('msg'),
+      brandOpts: ['molykote','dowsil','general'].map(id => ({ id, label: brandName[id], ...this.chip(f.brand === id), onClick: () => this.setState(x => ({ form: { ...x.form, brand: id }, errors: { ...x.errors, brand: undefined } })) })),
+      q: s.q, onQ: e => this.setState({ q: e.target.value }), clearFilters: () => this.setState({ q: '', cat: 'all', app: 'all' }) });
+    out.tabApp = this.chip(s.tab === 'app'); out.tabFam = this.chip(s.tab === 'fam'); out.isTabApp = s.tab === 'app'; out.isTabFam = s.tab === 'fam';
+    const dk = on => ({ bg: on ? 'var(--mint-300)' : 'transparent', fg: on ? 'var(--teal-950)' : 'var(--teal-100)' }); out.tabAppD = dk(s.tab === 'app'); out.tabFamD = dk(s.tab === 'fam');
+    out.setTabApp = () => this.setState({ tab: 'app' }); out.setTabFam = () => this.setState({ tab: 'fam' });
+    if (!D) return Object.assign(out, { histPoints: [], molyCats: [], catTabs: [], catChips: [], appChips: [], molyApps: [], products: [], selCat: {}, dowFactors: [], dowFams: [], dowPaths: [], selPath: {}, selPathFams: [], famChips: [], dowProds: [], homeApps: [], appOptions: [], hApps: [], selHome: {}, famIndex: [], clients: [], updates: [], cases: [], videos: [], docs: [], role: [] });
+
+    out.histPoints = D.history.points;
+    const toCat = id => this.go('molykote', { cat: id, app: 'all', q: '' }, this.dirRef);
+    out.molyCats = D.molyCats.map(c => ({ ...c, count: D.molyProducts.filter(p => p.cat === c.id || (p.also || []).includes(c.id)).length, onClick: () => toCat(c.id) }));
+    out.catTabs = D.molyCats.map(c => ({ ...c, ...this.chip(s.cat === c.id), onClick: () => { this.setState({ cat: c.id, app: 'all', q: '' }); this.scrollTo(this.dirRef); } }));
+    out.catChips = [{ id: 'all', n: '00', name: 'All families' }, ...D.molyCats].map(c => ({ ...c, ...this.chip(s.cat === c.id), onClick: () => this.setState({ cat: c.id }) }));
+    out.appChips = [{ id: 'all', name: 'Any' }, ...D.molyApps].map(a => ({ ...a, ...this.chip(s.app === a.id), onClick: () => this.setState({ app: a.id }) }));
+    out.molyApps = D.molyApps.map(a => ({ ...a, prods: D.molyProducts.filter(p => p.apps.includes(a.id) && !p.tbc).map(p => p.name.replace('MOLYKOTE® ', '')).join(' · '), onClick: () => { this.setState({ app: a.id, cat: 'all', q: '' }); this.scrollTo(this.dirRef); } }));
+    const q = s.q.trim().toLowerCase();
+    const catName = id => (D.molyCats.find(c => c.id === id) || {}).name;
+    out.products = D.molyProducts.filter(p => (s.cat === 'all' || p.cat === s.cat || (p.also || []).includes(s.cat)) && (s.app === 'all' || p.apps.includes(s.app)) && (!q || (p.name + ' ' + Object.values(p.titles || {}).join(' ') + ' ' + p.type + ' ' + p.desc + ' ' + p.app).toLowerCase().includes(q)))
+      .map(p => ({ ...p, name: (s.cat !== 'all' && p.titles && p.titles[s.cat]) || p.name, catName: s.cat !== 'all' ? catName(s.cat) : [p.cat, ...(p.also || [])].map(catName).join(' · '), spray: !!p.spray, specs: p.specs.map(x => ({ ...x, c: x.v === 'Verify TDS' ? 'var(--text-subtle)' : V.spec })), onEnquire: () => this.enquire('molykote', p.name) }));
+    out.noResults = out.products.length === 0;
+    out.resultLabel = out.products.length + (out.products.length === 1 ? ' product' : ' products') + (s.app !== 'all' ? ' · ' + (D.molyApps.find(a => a.id === s.app) || {}).name : '');
+    out.selCat = s.cat === 'all' ? { n: '00', name: 'All product families', intro: 'Representative MOLYKOTE® directory. Filter by family or application, or search by product name.' } : D.molyCats.find(c => c.id === s.cat);
+
+    out.dowFactors = D.dowFactors;
+    const famName = id => (D.dowFamilies.find(x => x.id === id) || {}).name;
+    const toFam = id => { this.setState({ dfam: id }); this.scrollTo(this.dowRef); };
+    out.dowFams = D.dowFamilies.map(x => ({ ...x, notConfirmed: !x.confirmed, onClick: () => toFam(x.id), goTo: () => this.go('dowsil', { dfam: x.id }, this.dowRef) }));
+    out.dowPaths = D.dowPaths.map((p, i) => ({ ...p, ...this.chip(i === s.dpath), onClick: () => this.setState({ dpath: i }) }));
+    const sp = D.dowPaths[s.dpath];
+    out.selPath = sp; out.selPathFams = sp.fams.map(id => ({ id, name: famName(id), onClick: () => toFam(id) }));
+    out.enquirePath = () => this.enquire('dowsil', sp.name);
+    const usedFams = ['all', ...new Set(D.dowProducts.map(p => p.fam))];
+    out.famChips = usedFams.map(id => ({ id, name: id === 'all' ? 'All' : famName(id), ...this.chip(s.dfam === id), onClick: () => this.setState({ dfam: id }) }));
+    out.dowProds = D.dowProducts.filter(p => s.dfam === 'all' || p.fam === s.dfam || !usedFams.includes(s.dfam)).map(p => ({ ...p, famName: famName(p.fam), onEnquire: () => this.enquire('dowsil', p.name) }));
+
+    const bl = { molykote: 'MOLYKOTE®', dowsil: 'DOWSIL™', both: 'MOLYKOTE® · DOWSIL™' };
+    out.homeApps = D.homeApps.map((a, i) => ({ ...a, brandLabel: bl[a.brand], m: a.brand !== 'dowsil', d: a.brand !== 'molykote', ...this.chip(i === s.happ), onPick: () => this.setState({ happ: i }), onClick: () => this.go(a.brand === 'both' ? 'products' : a.brand) }));
+    out.hApps = out.homeApps; out.selHome = out.homeApps[s.happ];
+    out.famIndex = [...D.molyCats.map(c => ({ brand: 'MOLYKOTE®', name: c.name, onClick: () => toCat(c.id) })), ...D.dowFamilies.filter(x => x.confirmed).map(x => ({ brand: 'DOWSIL™', name: x.name, onClick: () => this.go('dowsil', { dfam: x.id }, this.dowRef) }))];
+    out.clients = D.clients.map(c => ({ name: c, id: 'client-' + c.toLowerCase() }));
+    out.updates = D.insights.updates.map(u => ({ ...u, href: u.href || undefined, bg: u.href ? '#fff' : 'var(--surface-sunken)', foot: u.href ? 'Source: ' + u.src + ' · opens official page ↗' : (u.date || 'Placeholder · verified item to be added') }));
+    out.cases = D.insights.cases; out.videos = D.insights.videos;
+    out.docs = D.insights.docs.map(d => ({ ...d, href: d.href || undefined, icon: d.href ? 'external-link' : 'clock' }));
+    out.role = D.about.role;
+    const n = s.narrow;
+    out.idxCols = n ? '40px minmax(0,1fr)' : '48px minmax(0,1fr) minmax(0,2fr) 110px';
+    out.mxCols = n ? 'minmax(0,1fr)' : 'minmax(0,1.4fr) minmax(0,1.6fr) 110px 110px 24px';
+    out.tblCols = n ? 'minmax(0,1fr)' : 'minmax(0,1.2fr) minmax(0,1.5fr) minmax(0,1.1fr) minmax(0,1.1fr) 120px';
+    out.appCols = n ? 'minmax(0,1fr)' : 'minmax(0,1fr) minmax(0,1.6fr) 80px';
+    out.appOptions = [{ value: 'all', label: 'Any application' }, ...D.molyApps.map(a => ({ value: a.id, label: a.name }))];
+    out.appVal = s.app; out.onAppSel = e => this.setState({ app: e.target.value });
+    out.dowFams = out.dowFams.map(x => ({ ...x, st: x.confirmed ? 'In range' : 'To confirm', stc: x.confirmed ? 'var(--teal-700)' : 'var(--amber-600)' }));
+    out.homeApps = out.homeApps.map(a => ({ ...a, mt: a.m ? '● Yes' : '—', dt: a.d ? '● Yes' : '—', mc: a.m ? 'var(--teal-700)' : 'var(--neutral-400)', dc: a.d ? 'var(--teal-700)' : 'var(--neutral-400)' }));
+    return out;
+  }
+}
+</script>
+</body>
+</html>

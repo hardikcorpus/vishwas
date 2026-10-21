@@ -1,0 +1,8 @@
+/* Spacing (4px base), layout, radii — the system is SHARP: radii never exceed 6px */
+:root{
+--space-0:0;--space-1:2px;--space-2:4px;--space-3:8px;--space-4:12px;--space-5:16px;--space-6:20px;--space-7:24px;--space-8:32px;--space-9:40px;--space-10:48px;--space-11:64px;--space-12:80px;--space-13:96px;--space-14:128px;
+--radius-0:0;--radius-1:2px;--radius-2:4px;--radius-3:6px;
+--radius-control:var(--radius-1);--radius-card:var(--radius-2);--radius-dialog:var(--radius-3);
+--container-max:1240px;--container-pad:32px;--grid-gutter:24px;--header-h:72px;
+--control-h-s:32px;--control-h-m:40px;--control-h-l:48px;
+}
