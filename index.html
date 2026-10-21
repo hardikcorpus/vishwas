@@ -1416,7 +1416,7 @@
         <div style="display:grid;grid-template-columns:28px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid var(--border-subtle)"><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Icon" name="map" size="{{ 18 }}" color="var(--teal-700)" hint-size="18px,18px"></x-import><span style="font-size:15px;color:var(--text-body)">Service coverage · North India</span></div>
       </div>
     </div>
-    <div style="border:1px solid var(--border-subtle);border-radius:4px;padding:40px;background:#fff">
+    <div style="border:1px solid var(--border-subtle);border-radius:4px;padding:clamp(20px,5vw,40px);background:#fff">
       <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
         <div style="display:flex;flex-direction:column;gap:32px">
           <div style="display:flex;justify-content:flex-end;margin-bottom:-16px"><span style="font-size:12px;color:var(--text-subtle)"><span style="color:var(--status-danger)">*</span> Required</span></div>
@@ -1462,19 +1462,19 @@
               <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:13px;color:var(--text-strong)">Best time to call</span><div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ callOpts }}" as="o" hint-placeholder-count="3"><button type="button" onClick="{{ o.onClick }}" style="font:inherit;font-size:14px;cursor:pointer;padding:9px 12px;border-radius:2px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }}">{{ o.label }}</button></sc-for></div></div>
             </sc-if>
             <sc-if value="{{ isVisit }}">
-              <div style="display:flex;flex-direction:column;gap:16px;padding:20px;border:1px solid var(--teal-100);border-radius:4px;background:var(--surface-tint)">
+              <div style="display:flex;flex-direction:column;gap:16px;padding:clamp(14px,4vw,20px);border:1px solid var(--teal-100);border-radius:4px;background:var(--surface-tint)">
                 <div style="display:flex;flex-direction:column;gap:8px">
                   <span style="font-size:13px;color:var(--text-strong)">Visit date <span style="color:var(--status-danger)">*</span></span>
-                  <div style="background:#fff;border:1px solid var(--border-default);border-radius:2px;padding:16px;max-width:360px">
+                  <div style="background:#fff;border:1px solid var(--border-default);border-radius:2px;padding:clamp(10px,3vw,16px);max-width:360px">
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
                       <button type="button" onClick="{{ calPrev }}" aria-label="Previous month" style="font:inherit;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-subtle);border-radius:2px;background:#fff;opacity:{{ calPrevOp }}"><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Icon" name="chevron-left" size="{{ 16 }}" color="var(--teal-700)" hint-size="16px,16px"></x-import></button>
                       <span style="font-size:15px;color:var(--text-strong)">{{ calLabel }}</span>
                       <button type="button" onClick="{{ calNext }}" aria-label="Next month" style="font:inherit;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-subtle);border-radius:2px;background:#fff;opacity:{{ calNextOp }}"><x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Icon" name="chevron-right" size="{{ 16 }}" color="var(--teal-700)" hint-size="16px,16px"></x-import></button>
                     </div>
-                    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px">
+                    <div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px">
                       <sc-for list="{{ calDow }}" as="w" hint-placeholder-count="7"><span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-subtle);text-align:center;padding:4px 0">{{ w }}</span></sc-for>
                       <sc-for list="{{ calDays }}" as="d" hint-placeholder-count="35">
-                        <button type="button" onClick="{{ d.onClick }}" disabled="{{ d.off }}" style="font:inherit;font-size:13px;height:36px;border-radius:2px;border:1px solid {{ d.bd }};background:{{ d.bg }};color:{{ d.fg }};cursor:{{ d.cur }};visibility:{{ d.vis }}">{{ d.label }}</button>
+                        <button type="button" onClick="{{ d.onClick }}" disabled="{{ d.off }}" style="padding:0;min-width:0;font:inherit;font-size:13px;height:36px;border-radius:2px;border:1px solid {{ d.bd }};background:{{ d.bg }};color:{{ d.fg }};cursor:{{ d.cur }};visibility:{{ d.vis }}">{{ d.label }}</button>
                       </sc-for>
                     </div>
                     <span style="display:block;margin-top:10px;font-size:12px;color:var(--text-subtle)">Monday to Saturday · up to 8 weeks ahead</span>
