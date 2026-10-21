@@ -1487,17 +1487,19 @@
               </div>
             </sc-if>
           </div>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" value="{{ form.website }}" onInput="{{ setWebsite }}" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+          <sc-if value="{{ sendErr }}"><span role="alert" style="font-size:13px;color:var(--status-danger)">{{ sendErr }}</span></sc-if>
           <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:8px;border-top:1px solid var(--border-subtle)">
             <span style="font-size:13px;color:var(--text-subtle);max-width:320px">A visit date is a request — we'll confirm it with you before it's booked.</span>
-            <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" size="l" icon-right="arrow-up-right" on-click="{{ submit }}" hint-size="180px,48px">Send enquiry</x-import>
+            <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" size="l" icon-right="arrow-up-right" disabled="{{ sending }}" on-click="{{ submit }}" hint-size="180px,48px">{{ sendLabel }}</x-import>
           </div>
         </div>
       </sc-if>
       <sc-if value="{{ sent }}">
         <div style="display:flex;flex-direction:column;gap:16px;align-items:flex-start;padding:24px 0">
           <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Icon" name="circle-check" size="{{ 32 }}" color="var(--status-success)" hint-size="32px,32px"></x-import>
-          <h2 style="margin:0;font-size:28px;font-weight:400;letter-spacing:-.02em;color:var(--text-strong)">Enquiry ready to send.</h2>
-          <p style="margin:0;font-size:15px;line-height:1.55;color:var(--text-muted)">This is a prototype — no message has been sent. In the live site, your enquiry about <b style="font-weight:500;color:var(--text-strong)">{{ form.req }}</b> would go to our team{{ sentFollow }}.</p>
+          <h2 style="margin:0;font-size:28px;font-weight:400;letter-spacing:-.02em;color:var(--text-strong)">Enquiry sent.</h2>
+          <p style="margin:0;font-size:15px;line-height:1.55;color:var(--text-muted)">Thank you. Your enquiry about <b style="font-weight:500;color:var(--text-strong)">{{ form.req }}</b> has reached our team{{ sentFollow }}.</p>
           <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Button" variant="secondary" on-click="{{ resetForm }}" hint-size="160px,40px">New enquiry</x-import>
         </div>
       </sc-if>
@@ -1581,7 +1583,29 @@ class Component extends DCLogic {
     if (!f.mode) er.mode = 'Choose how you would like us to follow up.';
     if ((f.mode === 'phone' || f.mode === 'visit') && !f.phone.trim()) er.phone = 'Add a phone number so we can reach you.';
     if (f.mode === 'visit' && !f.vdate) er.vdate = 'Pick a date for the visit.';
-    this.setState(Object.keys(er).length ? { errors: er } : { sent: true, errors: {} });
+    if (Object.keys(er).length) { this.setState({ errors: er }); return; }
+    if (this.state.sending) return;
+    if (f.website) { this.setState({ sent: true, errors: {} }); return; }
+    const labels = { oem: 'OEM', tier1: 'Tier-1 supplier', tier2: 'Tier-2 / Tier-3 supplier', contract: 'Contract manufacturer', mro: 'Plant maintenance / MRO', reseller: 'Trader / reseller', other: 'Other' };
+    const body = {
+      _subject: 'Website enquiry: ' + f.name.trim() + ' (' + f.company.trim() + ')',
+      _template: 'table',
+      _captcha: 'false',
+      _replyto: f.email.trim(),
+      Name: f.name.trim(), Company: f.company.trim(), Email: f.email.trim(), Phone: f.phone.trim() || '-',
+      'Company type': labels[f.ctype] || f.ctype,
+      Brand: { molykote: 'Molykote', dowsil: 'DOWSIL', general: 'General enquiry' }[f.brand] || f.brand,
+      Requirement: f.req.trim(), Message: (f.msg || '').trim() || '-',
+      'Follow-up': { email: 'Email', phone: 'Phone call', visit: 'Site visit' }[f.mode],
+      'Best time to call': f.mode === 'phone' ? ({ am: 'Morning 10-12', mid: 'Midday 12-3', pm: 'Afternoon 3-6' }[f.cslot] || '-') : '-',
+      'Visit date': f.mode === 'visit' ? f.vdate + ' (' + ({ am: 'Morning 10-1', pm: 'Afternoon 2-5', any: 'Either' }[f.vslot] || 'no time chosen') + ')' : '-',
+      'Site location': f.mode === 'visit' ? (f.vsite || '-') : '-'
+    };
+    this.setState({ sending: true, sendErr: '' });
+    fetch('https://formsubmit.co/ajax/chandankohli@gmail.com', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) })
+      .then(r => r.json().then(j => { if (!r.ok || j.success === 'false' || j.success === false) throw new Error(j.message || 'Request failed'); }))
+      .then(() => this.setState({ sending: false, sent: true, errors: {} }))
+      .catch(() => this.setState({ sending: false, sendErr: 'Sorry, your enquiry could not be sent. Please try again, or email us directly.' }));
   }
   formVals(f, s) {
     const pick = (k, id) => () => this.setState(x => ({ form: { ...x.form, [k]: x.form[k] === id && k !== 'mode' ? '' : id }, errors: { ...x.errors, [k]: undefined, ...(k === 'mode' ? { phone: undefined, vdate: undefined } : {}) } }));
@@ -1609,7 +1633,7 @@ class Component extends DCLogic {
     const fmt = f.vdate ? new Date(f.vdate + 'T00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }) : '';
     const slot = { am: 'morning', pm: 'afternoon', any: 'any time' }[f.vslot];
     o.visitSummary = fmt ? 'REQUESTED · ' + fmt.toUpperCase() + (slot ? ' · ' + slot.toUpperCase() : '') : '';
-    o.sentFollow = f.mode === 'visit' && fmt ? ', and we would contact you to confirm a site visit on ' + fmt + (slot ? ' (' + slot + ')' : '') : f.mode === 'phone' ? ', and we would call you back' : f.mode === 'email' ? ', and we would reply by email' : '';
+    o.sentFollow = f.mode === 'visit' && fmt ? ', and we will contact you to confirm a site visit on ' + fmt + (slot ? ' (' + slot + ')' : '') : f.mode === 'phone' ? ', and we will call you back' : f.mode === 'email' ? ', and we will reply by email' : '';
     return o;
   }
   renderVals() {
@@ -1631,7 +1655,7 @@ class Component extends DCLogic {
     const brandName = { molykote: 'MOLYKOTE®', dowsil: 'DOWSIL™', general: 'General enquiry' };
     out.enquireMoly = () => this.enquire('molykote'); out.enquireDow = () => this.enquire('dowsil'); out.enquireGeneral = () => this.enquire('general');
     const f = s.form;
-    Object.assign(out, { form: f, err: s.errors, sent: s.sent, notSent: !s.sent, submit: () => this.submit(), resetForm: () => this.setState({ sent: false, calM: 0, form: { name: '', company: '', email: '', phone: '', brand: '', req: '', msg: '', ctype: '', mode: '', vdate: '', vslot: '', vsite: '', cslot: '' } }),
+    Object.assign(out, { form: f, err: s.errors, sent: s.sent, notSent: !s.sent, submit: () => this.submit(), sending: !!s.sending, sendErr: s.sendErr || '', sendLabel: s.sending ? 'Sending…' : 'Send enquiry', setWebsite: this.setF('website'), resetForm: () => this.setState({ sent: false, calM: 0, form: { name: '', company: '', email: '', phone: '', brand: '', req: '', msg: '', ctype: '', mode: '', vdate: '', vslot: '', vsite: '', cslot: '' } }),
       setName: this.setF('name'), setCompany: this.setF('company'), setEmail: this.setF('email'), setPhone: this.setF('phone'), setReq: this.setF('req'), setMsg: this.setF('msg'),
       brandOpts: ['molykote','dowsil','general'].map(id => ({ id, label: brandName[id], ...this.chip(f.brand === id), onClick: () => this.setState(x => ({ form: { ...x.form, brand: id }, errors: { ...x.errors, brand: undefined } })) })),
       ...this.formVals(f, s), q: s.q, onQ: e => this.setState({ q: e.target.value }), clearFilters: () => this.setState({ q: '', cat: 'all', app: 'all' }) });
