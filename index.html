@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vishwas Enterprises | MOLYKOTE® &amp; DOWSIL™ distributor, North India</title>
+<link rel="icon" type="image/png" href="assets/logo-ve.png">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -1559,8 +1561,14 @@ class Component extends DCLogic {
     this.onK = e => { if (e.key === 'Escape' && this.state.lb != null) this.setState({ lb: null }); }; window.addEventListener('keydown', this.onK); this.armSlides();
     const h = (location.hash || '').slice(1);
     if (['home','products','molykote','dowsil','about','insights','contact'].includes(h)) this.setState({ page: h });
+    this.syncTitle();
   }
   armSlides() { clearInterval(this.si); this.si = setInterval(() => { if ((this.props.awardsStyle ?? 'gallery') === 'slideshow' && this.state.page === 'about') this.setState(st => ({ si: ((st.si || 0) + 1) % AWARDS.length })); }, 4500); }
+  componentDidUpdate() { this.syncTitle(); }
+  syncTitle() {
+    const T = { home: 'Vishwas Enterprises | MOLYKOTE® & DOWSIL™ distributor, North India', products: 'Products | Vishwas Enterprises', molykote: 'MOLYKOTE® Specialty Lubricants | Vishwas Enterprises', dowsil: 'DOWSIL™ Silicone Products | Vishwas Enterprises', about: 'About Us | Vishwas Enterprises', insights: 'Insights & Case Studies | Vishwas Enterprises', contact: 'Contact Us | Vishwas Enterprises' };
+    const t = T[this.state.page]; if (t && document.title !== t) document.title = t;
+  }
   componentWillUnmount() { clearInterval(this.si); window.removeEventListener('resize', this.onR); window.removeEventListener('keydown', this.onK); clearTimeout(this.t); }
   top(ref) { const el = ref && ref.current; return el ? el.getBoundingClientRect().top + window.scrollY - 88 : 0; }
   go(page, extra, ref) {
