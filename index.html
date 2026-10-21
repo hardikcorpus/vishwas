@@ -607,19 +607,6 @@
     <div class="bh-img" style="flex:1.2 1 460px;position:relative;min-height:420px"><image-slot id="v1-dow-hero" shape="rect" placeholder="DOWSIL™ hero · silicone bead dispensed on a housing"></image-slot></div>
   </section>
 
-  <section style="border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle)">
-    <div style="max-width:1240px;margin:0 auto;padding:56px 32px">
-      <span style="display:block;margin-bottom:24px;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-subtle)">Five things that decide the right silicone</span>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:32px">
-        <sc-for list="{{ dowFactors }}" as="f" hint-placeholder-count="5">
-          <div style="display:flex;flex-direction:column;gap:8px;padding-top:16px;border-top:1px solid var(--teal-600)">
-            <span style="font-family:var(--font-mono);font-size:12px;color:var(--brass-600)">{{ f.n }}</span><span style="font-size:17px;color:var(--text-strong)">{{ f.k }}</span><span style="font-size:14px;line-height:1.5;color:var(--text-muted)">{{ f.v }}</span>
-          </div>
-        </sc-for>
-      </div>
-    </div>
-  </section>
-
   <section style="max-width:1240px;margin:0 auto;padding:96px 32px">
     <div style="display:flex;flex-direction:column;gap:20px;margin-bottom:40px">
       <x-import component-from-global-scope="VishwasEnterprisesDesignSystem_30bbd9.Eyebrow" index="01" hint-size="220px,16px">Application pathways</x-import>
