@@ -486,15 +486,6 @@
     </div>
     <div class="bh-img" style="flex:1.2 1 460px;position:relative;min-height:420px"><image-slot id="v1-moly-hero" shape="rect" placeholder="MOLYKOTE® hero · grease on a machined bearing"></image-slot></div>
   </section>
-  <section style="border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle);background:#fff">
-    <div style="max-width:1240px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
-      <sc-for list="{{ catTabs }}" as="c" hint-placeholder-count="7">
-        <a onClick="{{ c.onClick }}" style="cursor: pointer; text-decoration: none; padding: 20px 16px; display: flex; flex-direction: column; gap: 6px; border-bottom: 2px solid {{ c.bar }}; background: {{ c.tint }}; text-align: center" style-hover="background:var(--teal-50)">
-          <span style="font-size:15px;color:var(--text-strong)">{{ c.name }}</span>
-        </a>
-      </sc-for>
-    </div>
-  </section>
 
   <section ref="{{ dirRef }}" style="max-width:1240px;margin:0 auto;padding:64px 32px 96px;display:grid;grid-template-columns:{{ dirCols }};gap:48px">
     <aside style="display:flex;flex-direction:column;gap:32px">
