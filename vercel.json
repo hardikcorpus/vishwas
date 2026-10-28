@@ -1,0 +1,14 @@
+{
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.vishwasenterprises.com" }],
+      "destination": "https://vishwasenterprises.com/:path*",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    { "source": "/(products|molykote|dowsil|about|insights|contact)", "destination": "/index.html" }
+  ]
+}
